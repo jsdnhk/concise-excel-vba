@@ -1,292 +1,292 @@
 
-# 简明Excel VBA
+# 簡明Excel VBA
 Last update date：06/02/2020 18:57
 
-> `VBA` 缩写于 *Visual Basic for Applications*。
+> `VBA` 縮寫於 *Visual Basic for Applications*。
 
 <!-- TOC -->
 
-## 目录
+## 目錄
 
-- [x] [0x00 如何创建一个宏](#createAMacro) (English Version)
-- [x] [0x01 语法说明](#explanation) (done)
-    - [1.1 数据和数据类型](#1.1)
-    - [1.2 常量和变量](#1.2)
-    - [1.3 数组](#1.3)
-    - [1.4 运算符](#1.4)
-    - [1.5 语句结构](#1.5)
-        - [1.5.1 选择语句](#1.5.1)
-        - [1.5.2 循环语句](#1.5.2)
-        - [1.5.3 GoTo语句](#1.5.3)
-    - [1.6 过程(Sub)和函数(Function)](#1.6)
-      - [1.6.1 Sub 过程](#1.6.1)
-      - [1.6.2 Function 函数](#1.6.2)
-      - [1.6.3 VBA的参数传递](#1.6.3)
+- [x] [0x00 如何創建一個宏](#createAMacro) (English Version)
+- [x] [0x01 語法說明](#explanation) (done)
+    - [1.1 數據和數據類型](#1.1)
+    - [1.2 常量和變量](#1.2)
+    - [1.3 數組](#1.3)
+    - [1.4 運算符](#1.4)
+    - [1.5 語句結構](#1.5)
+        - [1.5.1 選擇語句](#1.5.1)
+        - [1.5.2 循環語句](#1.5.2)
+        - [1.5.3 GoTo語句](#1.5.3)
+    - [1.6 過程(Sub)和函數(Function)](#1.6)
+      - [1.6.1 Sub 過程](#1.6.1)
+      - [1.6.2 Function 函數](#1.6.2)
+      - [1.6.3 VBA的參數傳遞](#1.6.3)
       - [1.6.4 ByRef vs ByVal](#1.6.4)
-    - [1.7 正则表达式(Regular Expression)](#1.7)
-    - [1.8 注释（Comments code）](#1.8)
-    - [1.9 补充](#1.9)
+    - [1.7 正則表達式(Regular Expression)](#1.7)
+    - [1.8 註釋（Comments code）](#1.8)
+    - [1.9 補充](#1.9)
     - [1.10 示例](#1.10)
-- [x] [0x02 VBA界面介绍](#layout) (done)
-    - [2.1 整体界面说明](#2.1)
-    - [2.2 工程资源管理器（Project Explore）说明](#2.2)
-    - [2.3 设置VBA Macro Project 密码保护](#2.3)
-    - [2.4 常用快捷栏及窗口设置](#2.4)
-- [x] [0x03 对象操作说明](#object-option) (done)
-    - [3.1 对象简述](#3.1)
-    - [3.2 Application对象](#3.2)
-- [x] [0x04 字符串 String 相关常用操作](#string-option) (done)
+- [x] [0x02 VBA界面介紹](#layout) (done)
+    - [2.1 整體界面說明](#2.1)
+    - [2.2 工程資源管理器（Project Explore）說明](#2.2)
+    - [2.3 設置VBA Macro Project 密碼保護](#2.3)
+    - [2.4 常用快捷欄及窗口設置](#2.4)
+- [x] [0x03 對象操作說明](#object-option) (done)
+    - [3.1 對象簡述](#3.1)
+    - [3.2 Application對象](#3.2)
+- [x] [0x04 字符串 String 相關常用操作](#string-option) (done)
     - [4.1 Trim](#4.1)
-    - [4.2 Instr 和 InStrRev (类似indexOf函数)](#4.2)
-    - [4.3 Mid (类似substring函数)](#4.3)
+    - [4.2 Instr 和 InStrRev (類似indexOf函數)](#4.2)
+    - [4.3 Mid (類似substring函數)](#4.3)
     - [4.4 Left 和 Right](#4.4)
     - [4.5 Replace](#4.5)
-    - [4.6 StrReverse 倒转函数](#4.6)
-    - [4.7 其他字符串函数](#4.7)
-- [ ] [0x05 Excel 相关常用操作](#excel-option) (doing)
-    - [5.1 Excel 基础操作](#5.1)
-    - [5.2 打开Excel两种方式](#5.2)
+    - [4.6 StrReverse 倒轉函數](#4.6)
+    - [4.7 其他字符串函數](#4.7)
+- [ ] [0x05 Excel 相關常用操作](#excel-option) (doing)
+    - [5.1 Excel 基礎操作](#5.1)
+    - [5.2 打開Excel兩種方式](#5.2)
     - [5.3 操作Excel工作表（Worksheet）](#5.3)
-    - [5.4 Excel AutoFilter / Excel 自动筛选操作](#5.4)
-    - [5.5 清理Excel数据相关操作](#5.5)
-- [x] [0x06 文件 相关常用操作](#0x06) (done)
-    - [6.1 判断文件，文件夹等是否存在](#6.1)
-    - [6.2 文件相关操作](#6.2)
-    - [6.3 文件夹相关操作](#6.3)
-    - [6.4 其他操作（获取文件名等）](#6.4)
-- [ ] [0x07 日期和时间 相关函数](#0x07) (done)
-    - [7.1 Date, Time, Now 函数](#7.1)
-    - [7.2 日期函数：Year, Month, Day](#7.2)
-    - [7.3 CDate 和 DateValue 函数](#7.3)
-    - [7.4 IsDate 函数](#7.4)
-- [x] [0x10 VBA 转换函数一览](#0x10) (done) (*English Version*)
-- [x] [0x90 VBA Best Practices（VB代码规范/开发规约）](#0x90) (English Version)
+    - [5.4 Excel AutoFilter / Excel 自動篩選操作](#5.4)
+    - [5.5 清理Excel數據相關操作](#5.5)
+- [x] [0x06 文件 相關常用操作](#0x06) (done)
+    - [6.1 判斷文件，文件夾等是否存在](#6.1)
+    - [6.2 文件相關操作](#6.2)
+    - [6.3 文件夾相關操作](#6.3)
+    - [6.4 其他操作（獲取文件名等）](#6.4)
+- [ ] [0x07 日期和時間 相關函數](#0x07) (done)
+    - [7.1 Date, Time, Now 函數](#7.1)
+    - [7.2 日期函數：Year, Month, Day](#7.2)
+    - [7.3 CDate 和 DateValue 函數](#7.3)
+    - [7.4 IsDate 函數](#7.4)
+- [x] [0x10 VBA 轉換函數一覽](#0x10) (done) (*English Version*)
+- [x] [0x90 VBA Best Practices（VB代碼規範/開發規約）](#0x90) (English Version)
 - [ ] [0x08 Trouble shooting](#0x08) (doing)
-    - [91.1 消除Excel保存时警告（Privacy Warning:this document contains macros...）](#19.1)
-    - [91.2 清除Excel数据透视表中过滤器缓存（旧项目）](#91.2)
-    - [91.3 解决办法：The macros in this project are disabled. Please refer to ...](#91.3)
-    - [91.4 解决办法：添加一个宏文件(第三方插件)到快速访问栏](troubleshootings/Macro2QuickToolBar.md)
-    - [91.5 解决办法：如何修改编辑一个.xlam文件/解决保存修改后的.xlam文件再次内容消失问题](troubleshootings/EditXlamFile.md)
-    - [91.6 解决办法：使用SaveAs方法保存.xlsx后，再次打开提示: 文件损坏,后缀名错误（格式错误）](troubleshootings/SaveAsIssue.md)
-    - [91.7 解决办法：Excel每次保存时都弹出警告：“此文档中包含宏、Activex控件、XML扩展包信息”（office 2007/2010/365+）](#91.7)
-    - [91.8 解决办法：使用.xlam宏文件执行VBA程序时，操作excel无任何反应](#91.8)
-- [x] [0x92 VBA示例代码](#0x09) (done)
-- [ ] [0x93 Excel-VBA 快捷键](#0x10) (doing)
-- [x] [0x94 Excel-VBA Debug调试](Debug.md) (done)
-- [x] [0xFF 学习资源列表](#docslist) (done)
+    - [91.1 消除Excel保存時警告（Privacy Warning:this document contains macros...）](#19.1)
+    - [91.2 清除Excel數據透視表中過濾器緩存（舊項目）](#91.2)
+    - [91.3 解決辦法：The macros in this project are disabled. Please refer to ...](#91.3)
+    - [91.4 解決辦法：添加一個宏文件(第三方插件)到快速訪問欄](troubleshootings/Macro2QuickToolBar.md)
+    - [91.5 解決辦法：如何修改編輯一個.xlam文件/解決保存修改後的.xlam文件再次內容消失問題](troubleshootings/EditXlamFile.md)
+    - [91.6 解決辦法：使用SaveAs方法保存.xlsx後，再次打開提示: 文件損壞,後綴名錯誤（格式錯誤）](troubleshootings/SaveAsIssue.md)
+    - [91.7 解決辦法：Excel每次保存時都彈出警告：“此文檔中包含宏、Activex控件、XML擴展包信息”（office 2007/2010/365+）](#91.7)
+    - [91.8 解決辦法：使用.xlam宏文件執行VBA程序時，操作excel無任何反應](#91.8)
+- [x] [0x92 VBA示例代碼](#0x09) (done)
+- [ ] [0x93 Excel-VBA 快捷鍵](#0x10) (doing)
+- [x] [0x94 Excel-VBA Debug調試](Debug.md) (done)
+- [x] [0xFF 學習資源列表](#docslist) (done)
 
 <!-- /TOC -->
 
 
 <a name="createAMacro"></a>
-## 0x00 如何创建一个宏
-*Ref：* [如何创建一个宏](CreateAMacro.md) (English Version)
+## 0x00 如何創建一個宏
+*Ref：* [如何創建一個宏](CreateAMacro.md) (English Version)
 
 <a name="explanation"></a>
-## 0x01 语法说明
+## 0x01 語法說明
 
-都知道学会了英语语法，再加上大量的词汇基础，就算基本掌握了英语了。
-类似的要使用vba，也要入乡随俗，了解他的构成，简单的说vba包含`数据类型`、
-`变量`/`常量`、`对象`和常用的`语句结构`。
+都知道學會了英語語法，再加上大量的詞彙基礎，就算基本掌握了英語了。
+類似的要使用vba，也要入鄉隨俗，瞭解他的構成，簡單的說vba包含`數據類型`、
+`變量`/`常量`、`對象`和常用的`語句結構`。
 
-不过呢在量和复杂度上远低于英语，不用那么痛苦的记单词了，所以vba其实很简单的。
-熟悉了规则之后剩下就是查官方函数啦，查Excel提供的可操作对象啦。
+不過呢在量和複雜度上遠低於英語，不用那麼痛苦的記單詞了，所以vba其實很簡單的。
+熟悉了規則之後剩下就是查官方函數啦，查Excel提供的可操作對象啦。
 
-顺带一提的是，函数其实也很容易理解，方便使用。拿到一个函数，例如`Sum`，
-只要知道它是求多个数的和就够了，剩下的就是用了。例如`Sum(1000,9)`结果就是`1009`了。
-函数的一大好处就是隐藏具体实现细节，提供简洁的使用方法。
+順帶一提的是，函數其實也很容易理解，方便使用。拿到一個函數，例如`Sum`，
+只要知道它是求多個數的和就夠了，剩下的就是用了。例如`Sum(1000,9)`結果就是`1009`了。
+函數的一大好處就是隱藏具體實現細節，提供簡潔的使用方法。
 
 <a name="1.1"></a>
-### 1.1 数据和数据类型
+### 1.1 數據和數據類型
 
-Excel里的每一个单元格都是一个`数据`，无论是数字、字母或标点都是数据。
-对数据排排队，吃果果，对不同的数据扔到不同的篮子里归类，篮子就是`数据类型`了。
+Excel裏的每一個單元格都是一個`數據`，無論是數字、字母或標點都是數據。
+對數據排排隊，吃果果，對不同的數據扔到不同的籃子裏歸類，籃子就是`數據類型`了。
 
-在Excel-vba中，`数据类型`只有`数值`、`文本`、`日期`、`逻辑`或`错误`五种类型。
-前四种最为常用。具体描述参见下表：
+在Excel-vba中，`數據類型`只有`數值`、`文本`、`日期`、`邏輯`或`錯誤`五種類型。
+前四種最爲常用。具體描述參見下表：
 
 
-| 类型 | 类型名称 | 范围 | 占用空间|声明符号 | 备注|
+| 類型 | 類型名稱 | 範圍 | 佔用空間|聲明符號 | 備註|
 |--------|-------|-----|--------|-----|----|
-| **逻辑型**|
-| 布尔 | Boolean|逻辑值True或False|2|
-|**数值型**|
-|字节| Byte | 0~255的整数|1|
-|整数| Integer| -32768~32767|2|%|
-|长整数|Long|-2147483648~2147483647|4|&|
-|单精度浮点|Single||4|!|
-|双精度浮点|Double||4|#|
-|货币|Currency||8|@|
-|小数|Decimal||14|
+| **邏輯型**|
+| 布爾 | Boolean|邏輯值True或False|2|
+|**數值型**|
+|字節| Byte | 0~255的整數|1|
+|整數| Integer| -32768~32767|2|%|
+|長整數|Long|-2147483648~2147483647|4|&|
+|單精度浮點|Single||4|!|
+|雙精度浮點|Double||4|#|
+|貨幣|Currency||8|@|
+|小數|Decimal||14|
 |**日期型**|
-|日期|Date|日期范围:100/1/1~9999/12/31|8|
+|日期|Date|日期範圍:100/1/1~9999/12/31|8|
 |**文本型**|
-|变长字符串|String|0~20亿||$|
-|定长字符串|String|1~65400||
+|變長字符串|String|0~20億||$|
+|定長字符串|String|1~65400||
 |**其他**|
-|变体型|Variant(数值)|保存任意数值，也可以存储Error,Empty,Nothing,Null等特殊数值|
-|对象|Object|引用对象|4|
+|變體型|Variant(數值)|保存任意數值，也可以存儲Error,Empty,Nothing,Null等特殊數值|
+|對象|Object|引用對象|4|
 
-表1.1 VBA数据类型
+表1.1 VBA數據類型
 
-补充一点是，数组就像一筐水果，里面可以存不止一个数据。
-他不是一个具体的数据类型，叫数据结构更合适些。
+補充一點是，數組就像一筐水果，裏面可以存不止一個數據。
+他不是一個具體的數據類型，叫數據結構更合適些。
 
 <a name="1.2"></a>
-### 1.2 常量和变量
+### 1.2 常量和變量
 
-定义后不能被改变的量，就是`常量`；相反的`变量`就能修改具体值。
+定義後不能被改變的量，就是`常量`；相反的`變量`就能修改具體值。
 
-在vba里，使用一个 变量/常量 要先声明。
+在vba裏，使用一個 變量/常量 要先聲明。
 
-`常量`声明方法如下：</br>
-` Const 常量名称 As 数据类型 = 存储在常量中的数据`
+`常量`聲明方法如下：</br>
+` Const 常量名稱 As 數據類型 = 存儲在常量中的數據`
 例如：
 ```vba
-Const PI As Single = 3.14 ' 定义一个浮点常量为PI，值为3.14
+Const PI As Single = 3.14 ' 定義一個浮點常量爲PI，值爲3.14
 ```
 
-`变量`声明方法如下：</br>
+`變量`聲明方法如下：</br>
 ```vba
-Dim 变量名 As 数据类型
+Dim 變量名 As 數據類型
 ```
-变量名，必须**字母**或**汉字**开头，**不能** 包含空格、句号、感叹号等。
+變量名，必須**字母**或**漢字**開頭，**不能** 包含空格、句號、感嘆號等。
 
-数据类型，对应上面 ↑　表1.1里的那些
+數據類型，對應上面 ↑　表1.1裏的那些
 
-更多的声明方法，跟`Dim`声明的区别是作用范围不同：
+更多的聲明方法，跟`Dim`聲明的區別是作用範圍不同：
 ```vba
-Private v1 As Integer   ' v1为私有整形变量
-Public v2 As String     ' v2为共有字符串变量
-Static v3 As Integer    ' v3为静态变量，程序结束后值不变
+Private v1 As Integer   ' v1爲私有整形變量
+Public v2 As String     ' v2爲共有字符串變量
+Static v3 As Integer    ' v3爲靜態變量，程序結束後值不變
 
-' 变量声明之后，就可以赋值和使用了
+' 變量聲明之後，就可以賦值和使用了
 v1 = 1009
 v2 = "1009"
 v3 = 1009
 
-' 使用类型声明符，可以达到跟上面同样的效果
-public v2$  ' 与 Public v2 As String 效果一样
+' 使用類型聲明符，可以達到跟上面同樣的效果
+public v2$  ' 與 Public v2 As String 效果一樣
 
-' 声明变量时，不指定具体的类型就变成了Variant类型，根据需要转换数据类型
+' 聲明變量時，不指定具體的類型就變成了Variant類型，根據需要轉換數據類型
 Dim v4
 ```
 
 <a name="1.3"></a>
-### 1.3 数组
+### 1.3 數組
 
-使用数组和对象时，也要声明，这里说下数组的声明：
+使用數組和對象時，也要聲明，這裏說下數組的聲明：
 ```vba
-' 确定范围的数组，可以存储b - a + 1个数，a、b为整数
-Dim 数组名称(a To b) As 数据类型
+' 確定範圍的數組，可以存儲b - a + 1個數，a、b爲整數
+Dim 數組名稱(a To b) As 數據類型
 
-Dim arr(1 TO 100) As Integer ' 表示arr可以存储100个整数
-arr(100) '表示arr中第100个数据
+Dim arr(1 TO 100) As Integer ' 表示arr可以存儲100個整數
+arr(100) '表示arr中第100個數據
 
-' 不指定a，直接声明时，默认a为0
-Dim arr2(100) As Integer ' 表示arr可以存储101个整数,从0数
-arr2(100) '表示arr2中第101个数据
+' 不指定a，直接聲明時，默認a爲0
+Dim arr2(100) As Integer ' 表示arr可以存儲101個整數,從0數
+arr2(100) '表示arr2中第101個數據
 
-' 多维数组
-Dim arr3(1 To 3,1 To 3,1 To 3) As Integer ' 定义了一个三维数组，可以存储3*3*3=27个整数
+' 多維數組
+Dim arr3(1 To 3,1 To 3,1 To 3) As Integer ' 定義了一個三維數組，可以存儲3*3*3=27個整數
 
-' 动态数组，不确定数组大小时使用
-Dim arr4() As Integer   ' 定义arr4为整形动态数组
-ReDim arr4(1 To v1)     ' 设定arr4的大小，不能重新设定arr4的类型
+' 動態數組，不確定數組大小時使用
+Dim arr4() As Integer   ' 定義arr4爲整形動態數組
+ReDim arr4(1 To v1)     ' 設定arr4的大小，不能重新設定arr4的類型
 
 ```
 
-除了用`Dim`做常规的数组的声明，还有下面这些声明数组的方式:
+除了用`Dim`做常規的數組的聲明，還有下面這些聲明數組的方式:
 ```vba
-' 使用Array函数将已知的数据常量放到数组里
-Dim arr As Variant        ' 定义arr为变体类型
-arr = Array(1, 1, 2, 3, 5, 8, 13, 21) ' 将整数存储到arr中,索引默认从0开始
+' 使用Array函數將已知的數據常量放到數組裏
+Dim arr As Variant        ' 定義arr爲變體類型
+arr = Array(1, 1, 2, 3, 5, 8, 13, 21) ' 將整數存儲到arr中,索引默認從0開始
 
-' 使用Split函数分隔字符串创建数组
+' 使用Split函數分隔字符串創建數組
 Dim arr2 As Variant
-arr2 = Split("hello, world", ", ") ' 按,分隔字符串 hello,world 并赋值给arr2
+arr2 = Split("hello, world", ", ") ' 按,分隔字符串 hello,world 並賦值給arr2
 
-' 使用Excel单元格区域创建数组
-' 这种方式创建的数组，索引默认从1开始
+' 使用Excel單元格區域創建數組
+' 這種方式創建的數組，索引默認從1開始
 Dim arr3 As Variant
-arr3 = Range("A1:C3").Value   ' 将A1:C3中的数组存储到arr3中
-Range("A4:C6").Value= arr3    ' 将arr3中的数据写入到A4:C6中的区域
+arr3 = Range("A1:C3").Value   ' 將A1:C3中的數組存儲到arr3中
+Range("A4:C6").Value= arr3    ' 將arr3中的數據寫入到A4:C6中的區域
 ```
 
 
-**数组常用的函数**
+**數組常用的函數**
 
-|函数|函数说明|参数说明|示例|
+|函數|函數說明|參數說明|示例|
 |----|----|----|----|
-|`UBound(Array arr, [Integer i])`|数组最大的索引值|`arr`：数组；`i`：整形，数组维数|
-|`LBound(Array arr, [Integer i])`|数组最小的索引值|同上|
-|`Join(Array arr, [String s])`|合并字符串|`arr`：数组；`s`：合并的分隔符|
+|`UBound(Array arr, [Integer i])`|數組最大的索引值|`arr`：數組；`i`：整形，數組維數|
+|`LBound(Array arr, [Integer i])`|數組最小的索引值|同上|
+|`Join(Array arr, [String s])`|合併字符串|`arr`：數組；`s`：合併的分隔符|
 |`Split(String str, [String s])`|分割字符串|`str`：待分割的字符串；`s`：分割字符串的分隔符|
 
-函数说明
+函數說明
 
 UBound(Array arr,[Integer i]);</br>
-UBound为函数名</br>
-arr和i 为UBound的的参数，用中括号括起来的表示i为非必填参数</br>
-arr和i 之前的Array，Integer表示对应参数的数据类型</br>
+UBound爲函數名</br>
+arr和i 爲UBound的的參數，用中括號括起來的表示i爲非必填參數</br>
+arr和i 之前的Array，Integer表示對應參數的數據類型</br>
 
-> 补充
-> [VBA 内置函数列表](https://msdn.microsoft.com/zh-cn/library/office/jj692811.aspx)
+> 補充
+> [VBA 內置函數列表](https://msdn.microsoft.com/zh-cn/library/office/jj692811.aspx)
 
 
 <a name="1.4"></a>
-### 1.4 运算符
+### 1.4 運算符
 
-运算符的作用是对数据进行操作，像加减乘除等。这块不再具体说明，列一下vba中常用的运算符。
+運算符的作用是對數據進行操作，像加減乘除等。這塊不再具體說明，列一下vba中常用的運算符。
 
-|运算符|作用|示例|
+|運算符|作用|示例|
 |----|----|----|
-|**算术运算符**|
-|+|求两个数的和|
-|-|求两个数的差|
-|*|求两个数的乘积|
-|/|求两个数的商|
-|`\`|求两个数相除后所得商的整数|
-|^|求一个数的某次方|
-|Mod|求两个数相除后所得的余数| 10 Mod 9=1|
-|**比较运算符**|
-|=|比较两个数据是否相等|相等返回 True;否则返回False|
+|**算術運算符**|
+|+|求兩個數的和|
+|-|求兩個數的差|
+|*|求兩個數的乘積|
+|/|求兩個數的商|
+|`\`|求兩個數相除後所得商的整數|
+|^|求一個數的某次方|
+|Mod|求兩個數相除後所得的餘數| 10 Mod 9=1|
+|**比較運算符**|
+|=|比較兩個數據是否相等|相等返回 True;否則返回False|
 |<>|不相等|
-|<|小于|
-|>|大于|
-|<=|不大于|
-|>=|不小于|
-|Is|比较连个对象的引用关系|
-|Like|比较两个字符串是否匹配| String1 Like String2|
-|**文本运算符**|
-|+|连接两个字符串|
-|&|连接两个字符串|
-|**逻辑运算符**|
-|And|逻辑与|
-|Or|逻辑或|
-|Not|逻辑非|
-|Xor|逻辑抑或|`表达式1 Xor 表达式2`两个表达式返回的值不相等时为True|
-|Eqv|逻辑等价|`表达式1 Eqv 表达式2`两个表达式返回的值相等时为True|
-|Imp|逻辑蕴含|
+|<|小於|
+|>|大於|
+|<=|不大於|
+|>=|不小於|
+|Is|比較連個對象的引用關係|
+|Like|比較兩個字符串是否匹配| String1 Like String2|
+|**文本運算符**|
+|+|連接兩個字符串|
+|&|連接兩個字符串|
+|**邏輯運算符**|
+|And|邏輯與|
+|Or|邏輯或|
+|Not|邏輯非|
+|Xor|邏輯抑或|`表達式1 Xor 表達式2`兩個表達式返回的值不相等時爲True|
+|Eqv|邏輯等價|`表達式1 Eqv 表達式2`兩個表達式返回的值相等時爲True|
+|Imp|邏輯蘊含|
 
 ```vba
-' Like是个比较有用的运算符，常用来做匹配或模糊匹配。
-' 在模糊匹配的时候，有一些通配符能方便模糊匹配规则的书写
-"这是一个demo1" Like "*demo1" = True    ' * 号表示匹配任意多个字符
-"这是一个demo2" Like "????demo2" = True ' ? 号表示匹配任意单个字符
-"这是一个demo3" Like "*demo#" = True    ' # 号表示匹配任意数字
+' Like是個比較有用的運算符，常用來做匹配或模糊匹配。
+' 在模糊匹配的時候，有一些通配符能方便模糊匹配規則的書寫
+"這是一個demo1" Like "*demo1" = True    ' * 號表示匹配任意多個字符
+"這是一個demo2" Like "????demo2" = True ' ? 號表示匹配任意單個字符
+"這是一個demo3" Like "*demo#" = True    ' # 號表示匹配任意數字
 ```
 
 
-#### 三目运算符
+#### 三目運算符
 
-正常在VBA中没有类似java的 `expression ? true : false` 写法，但是可以使用 `IFF` 来代替：
+正常在VBA中沒有類似java的 `expression ? true : false` 寫法，但是可以使用 `IFF` 來代替：
 ```vba
 x = IIF(expression, A, B）
-x = IIF(条件, 如果成立A赋值给X, 如果不成立B赋值给X）
+x = IIF(條件, 如果成立A賦值給X, 如果不成立B賦值給X）
 ```
 
-作用也等同于如下：
+作用也等同於如下：
 ```
 If ... Then
 Else
@@ -295,57 +295,57 @@ End If
 
 
 <a name="1.5"></a>
-### 1.5 语句结构
+### 1.5 語句結構
 
-程序通常都是顺序依次执行的。语句结构用来控制程序执行的步骤，
-一般有**选择**语句、**循环** 语句。
+程序通常都是順序依次執行的。語句結構用來控制程序執行的步驟，
+一般有**選擇**語句、**循環** 語句。
 
 <a name="1.5.1"></a>
-#### 1.5.1 选择语句
+#### 1.5.1 選擇語句
 
-选择语句用来判断程序执行那一部分代码
+選擇語句用來判斷程序執行那一部分代碼
 
-语法：If ... Then ... End If</br>
-If选择可以嵌套使用</br>
+語法：If ... Then ... End If</br>
+If選擇可以嵌套使用</br>
 
-常用的三种形式：
+常用的三種形式：
 
 1. 普通模式
 ```vba
 If 10 > 3 Then
-    操作1  ' 执行这一步
+    操作1  ' 執行這一步
 End If
 
-' 增加Else和Else If逻辑
+' 增加Else和Else If邏輯
 If 1 > 2 Then
     操作1
 ElseIf 1 = 2 Then
     操作2
 Else
-    操作3  ' 执行这一步
+    操作3  ' 執行這一步
 End If
 ```
 
-2. 嵌套If语句
+2. 嵌套If語句
 ```vba
 If 10 > 3 Then
     If 1 > 2 Then
         操作1
     Else
-        操作2  ' 执行这一步
+        操作2  ' 執行這一步
     End If
 Else
     操作3
 End If
 ```
 
-3. Select ... Case ... 多选一，类似于java中的 Switch ... Case ... 语句
+3. Select ... Case ... 多選一，類似於java中的 Switch ... Case ... 語句
 ```vba
 Dim Length As Integer
 Length = 10
 Select Length
     Case Is >= 8
-        操作1  ' 执行这一步
+        操作1  ' 執行這一步
     Case Is > 20
         操作2
     Case Else
@@ -373,61 +373,61 @@ End Sub
 ```
 
 <a name="1.5.2"></a>
-#### 1.5.2 循环语句
+#### 1.5.2 循環語句
 
-循环语句用来让程序重复执行某段代码
+循環語句用來讓程序重複執行某段代碼
 
-1. 普通For ... Next循环</br>
-语法：For 循环变量 = 初始值 To 终值 Step 步长</br>
-注：在VBA循环中可以使用`Exit`关键字来跳出循环，类似于Java中的break，
-在for循环中语法为：`Exit For`，在do while循环中为：`Exit Do`，也可以利用`GoTo`语句
-跳出本次循环，详见：[1.5.3 GoTo语句](#1.5.3)</br>
+1. 普通For ... Next循環</br>
+語法：For 循環變量 = 初始值 To 終值 Step 步長</br>
+注：在VBA循環中可以使用`Exit`關鍵字來跳出循環，類似於Java中的break，
+在for循環中語法爲：`Exit For`，在do while循環中爲：`Exit Do`，也可以利用`GoTo`語句
+跳出本次循環，詳見：[1.5.3 GoTo語句](#1.5.3)</br>
 ```vba
 Dim i As Integer
-For i = 1 To 10 Step 2 ' 设定i从1到10，每次增加2，总共执行5次
-    操作1   ' 可以通过设定 Exit For 退出循环
+For i = 1 To 10 Step 2 ' 設定i從1到10，每次增加2，總共執行5次
+    操作1   ' 可以通過設定 Exit For 退出循環
 Next i
 ```
 
-2. For Each ... 循环</br>
-语法：For Each 变量 In 集合或数组
+2. For Each ... 循環</br>
+語法：For Each 變量 In 集合或數組
 ```vba
 Dim arr
 Dim i As Integer
 arr = Array(1, 2, 3, 4, 5)
-For Each i In arr ' 定义变量i，遍历arr数组
+For Each i In arr ' 定義變量i，遍歷arr數組
     操作1
 Next i
 ```
 
-3. Do ... While循环</br>
-语法：</br>
-- 前置循环条件：</br>
+3. Do ... While循環</br>
+語法：</br>
+- 前置循環條件：</br>
 ![Alt text](doc/source/images/dowhileloopsyntax.png)
 
-- 后置循环条件：</br>
+- 後置循環條件：</br>
 ![Alt text](doc/source/images/dowhileloopsyntax_suffix.png)
 
 Sample code:
 ```vba
 Dim i As Integer
 i = 1
-Do While i < 5  ' 循环5次
+Do While i < 5  ' 循環5次
     i = i + 1
 Loop
 
 ' ===============================================
-' 将判断条件后置的Do...While
+' 將判斷條件後置的Do...While
 Dim i As Integer
 i = 1
 Do
     i = i + 1
-Loop While i < 5 ' 循环4次
+Loop While i < 5 ' 循環4次
 ```
 
-4. Do Until 直到...循环</br>
-语法：</br>
-Do Until 表达式    表达式为真时跳出循环
+4. Do Until 直到...循環</br>
+語法：</br>
+Do Until 表達式    表達式爲真時跳出循環
 ```vba
 Dim i As Integer
 i = 5
@@ -436,7 +436,7 @@ Do Until i < 1
 Loop
 
 ' ===============================================
-' 后置的Do Until
+' 後置的Do Until
 Dim i As Integer
 i = 5
 Do
@@ -445,13 +445,13 @@ Loop Until i < 1
 ```
 
 <a name="1.5.3"></a>
-#### 1.5.3 GoTo语句
+#### 1.5.3 GoTo語句
 
 **GoTo**
-无条件地分支直接跳转到过程中指定的行。
+無條件地分支直接跳轉到過程中指定的行。
 
-**注：** GoTo语句大多用于错误处理时，但会影响程序结构，增加阅读和代码调试难度，
-除非必要时，应尽量避免使用GoTo语句。
+**注：** GoTo語句大多用於錯誤處理時，但會影響程序結構，增加閱讀和代碼調試難度，
+除非必要時，應儘量避免使用GoTo語句。
 
 ```vba
 Sub TestGoTo
@@ -462,45 +462,45 @@ Sub TestGoTo
 JUMPX:
     i = i + 1
     If i <= 100 Then GoTo JUMPX
-    Debug.Print "1到100的自然数之和是：" & lngSum
+    Debug.Print "1到100的自然數之和是：" & lngSum
 
 End Sub
 ```
 
 **CONTINUE**
 
-循环中实现continue操作，类似java语言的continue直接跳出本次循环
+循環中實現continue操作，類似java語言的continue直接跳出本次循環
 ```vba
 Sub continueTest()
     Dim i
 
     For i = 0 To 5
         If i = 1 Then
-            '// 跳转到CONTINUE部分
+            '// 跳轉到CONTINUE部分
             GoTo CONTINUE
         ElseIf i = 3 Then
-            '// 跳转到CONTINUE部分
+            '// 跳轉到CONTINUE部分
             GoTo CONTINUE
         End If
 
-        '//没有GoTo语句的时候打印counter: i
+        '//沒有GoTo語句的時候打印counter: i
         Debug.Print i
 
-CONTINUE:   '// countinue跳转块，可以写逻辑，如果没有逻辑就直接进行下次循环
+CONTINUE:   '// countinue跳轉塊，可以寫邏輯，如果沒有邏輯就直接進行下次循環
     Next
 
 End Sub
 ```
 
-`选择`和`循环`提供了多种实现同一目的的语句结构，他们都能实现同样的作用，
-差别一般是初始条件。还有书写的复杂度。正确的选择要使用的语句结构，
-代码逻辑上会更清楚，方便人的阅读。
+`選擇`和`循環`提供了多種實現同一目的的語句結構，他們都能實現同樣的作用，
+差別一般是初始條件。還有書寫的複雜度。正確的選擇要使用的語句結構，
+代碼邏輯上會更清楚，方便人的閱讀。
 
-**简写**
+**簡寫**
 
-在操作对象的属性时常常要先把对象调用路径都写出来，用`with`可以简化这一操作
+在操作對象的屬性時常常要先把對象調用路徑都寫出來，用`with`可以簡化這一操作
 ```vba
-' 简化前
+' 簡化前
 WorkSheets("表1").Range("A1").Font.Name="仿宋"
 WorkSheets("表1").Range("A1").Font.Size=12
 WorkSheets("表1").Range("A1").Font.ColorIndex=3
@@ -514,72 +514,72 @@ End With
 ```
 
 <a name="1.6"></a>
-### 1.6 过程(Sub)和函数(Function)
+### 1.6 過程(Sub)和函數(Function)
 
-概述Sub和Function的区别：   
+概述Sub和Function的區別：   
 
-**Sub** 和 **Function** 是VBA提供的两种封装体。
-* 利用宏录制得到的就是`Sub`。
-* `Sub` 定义时无需定义返回值类型，而 `Function` 一般需要用 “As 数据类型” 定义函数返回值类型。
-* `Sub` 中没有对过程名赋值的语句，而 `Function` 中有对函数名赋值的语句，一般在函数最后返回值，格式如下：
+**Sub** 和 **Function** 是VBA提供的兩種封裝體。
+* 利用宏錄製得到的就是`Sub`。
+* `Sub` 定義時無需定義返回值類型，而 `Function` 一般需要用 “As 數據類型” 定義函數返回值類型。
+* `Sub` 中沒有對過程名賦值的語句，而 `Function` 中有對函數名賦值的語句，一般在函數最後返回值，格式如下：
 ```vba
 Set functionName = xxxxxx
 ```
-* 调用过程：调用 Sub 过程与 Function 过程不同。调用 Sub 过程的是一个独立的语句，而调用函数过程只是表达式的一部分。另外，自定义函数并不允许修改工作表和单元格格式 (A UDF will only return a value it won't allow you to change the properties of a cell/sheet/workbook. )。但是，与 Function 一样，Sub 也可以修改传递给它们的任何变量的值。
-* 调用 Sub 过程有三种方法：   [参见1.6.1](#1.6.1)   
+* 調用過程：調用 Sub 過程與 Function 過程不同。調用 Sub 過程的是一個獨立的語句，而調用函數過程只是表達式的一部分。另外，自定義函數並不允許修改工作表和單元格格式 (A UDF will only return a value it won't allow you to change the properties of a cell/sheet/workbook. )。但是，與 Function 一樣，Sub 也可以修改傳遞給它們的任何變量的值。
+* 調用 Sub 過程有三種方法：   [參見1.6.1](#1.6.1)   
 
-~~以下语句都调用了名为 ProcExcel 的 Sub 过程。~~
+~~以下語句都調用了名爲 ProcExcel 的 Sub 過程。~~
 
-  ~~Call  ProcExcel (FirstArgument, SecondArgument) '使用Call关键字调用~~   
-  ~~ProcExcel  FirstArgument, SecondArgument        '直接调用~~   
+  ~~Call  ProcExcel (FirstArgument, SecondArgument) '使用Call關鍵字調用~~   
+  ~~ProcExcel  FirstArgument, SecondArgument        '直接調用~~   
   ~~Application.Run "ProcExcel" FirstArgument, SecondArgument~~   
 
 
-~~**注意** ：当使用 Call 语法时，**参数必须在括号内**。若省略 Call 关键字，则也必须省略参数两边的括号。~~
+~~**注意** ：當使用 Call 語法時，**參數必須在括號內**。若省略 Call 關鍵字，則也必須省略參數兩邊的括號。~~
 
 
 <a name="1.6.1"></a>
-#### 1.6.1 Sub 过程
+#### 1.6.1 Sub 過程
 ```vba
-[Private|Public] [Static] Sub 过程名([参数列表 [As 数据类型]])
-    [语句块]
+[Private|Public] [Static] Sub 過程名([參數列表 [As 數據類型]])
+    [語句塊]
 End Sub
-' [Private|Public]定义过程的作用范围
-' [Static]定义过程是否为静态
-' [参数列表]定义需要传入的参数
+' [Private|Public]定義過程的作用範圍
+' [Static]定義過程是否爲靜態
+' [參數列表]定義需要傳入的參數
 ```
 
-调用`Sub`的方法有三种，使用 `Call`、<u>直接调用</u>和使用 `Application.Run`:
+調用`Sub`的方法有三種，使用 `Call`、<u>直接調用</u>和使用 `Application.Run`:
 
-举个例子：
+舉個例子：
 ![Alt text](/doc/source/images/1505555701907.png)
 
-**注意** ：当使用 Call 语法时，**参数必须在括号内**。若省略 Call 关键字，则也必须省略参数两边的括号。
+**注意** ：當使用 Call 語法時，**參數必須在括號內**。若省略 Call 關鍵字，則也必須省略參數兩邊的括號。
 
 <a name="1.6.2"></a>
-#### 1.6.2 Function 函数
+#### 1.6.2 Function 函數
 
-vba内部提供了大量的函数，也可以通过`Function`来定义函数，实现个性化的需求。
+vba內部提供了大量的函數，也可以通過`Function`來定義函數，實現個性化的需求。
 ```vba
-[Public|private] [Static] Function 函数名([参数列表 [As 数据类型]]) [As 数据类型]
-    [语句块]
-    [函数名=过程结果]
+[Public|private] [Static] Function 函數名([參數列表 [As 數據類型]]) [As 數據類型]
+    [語句塊]
+    [函數名=過程結果]
 End Function
 ```
-使用函数完成上面的例子：
+使用函數完成上面的例子：
 ![Alt text](/doc/source/images/1505556598033.png)
 
 
 <a name="1.6.3"></a>
-#### 1.6.3 VBA的参数传递
+#### 1.6.3 VBA的參數傳遞
 
-参数传递的方式有两种，引用和传值。
-传值，只是将数据的内容给到函数，不会对数据本身进行修改。
-引用，将数据本身传给函数，在函数内部对数据的修改将同样的影响到数据本身的内容。
+參數傳遞的方式有兩種，引用和傳值。
+傳值，只是將數據的內容給到函數，不會對數據本身進行修改。
+引用，將數據本身傳給函數，在函數內部對數據的修改將同樣的影響到數據本身的內容。
 
-参数定义时，使用`ByVal`关键字定义传值，子过程中对参数的修改不会影响到原有变量的内容。
-默认情况下，过程是按引用方式传递参数的。在这个过程中对参数的修改会影响到原有的变量。
-也可以使用`ByRef`关键字显示的声明按引用传参。
+參數定義時，使用`ByVal`關鍵字定義傳值，子過程中對參數的修改不會影響到原有變量的內容。
+默認情況下，過程是按引用方式傳遞參數的。在這個過程中對參數的修改會影響到原有的變量。
+也可以使用`ByRef`關鍵字顯示的聲明按引用傳參。
 ```vba
 Sub St1(ByVal n As Integer, ByRef range)
     ...Other code
@@ -589,8 +589,8 @@ End SUb
 <a name="1.6.4"></a>
 #### 1.6.4 ByRef vs ByVal
 
-举个简单栗子来解释值传和引用传递的区别：   
-可以参照[Create A Macro](CreateAMacro.md) 在工作表上放置一个command button，并添加以下代码：
+舉個簡單栗子來解釋值傳和引用傳遞的區別：   
+可以參照[Create A Macro](CreateAMacro.md) 在工作表上放置一個command button，並添加以下代碼：
 
 ```
 Dim x As Integer
@@ -600,11 +600,11 @@ MsgBox Triple(x)
 MsgBox x
 ```
 
-在上述代码中调用了`Triple`函数，按照如下步骤添加一个`Triple`函数模块：
+在上述代碼中調用了`Triple`函數，按照如下步驟添加一個`Triple`函數模塊：
 
-1. 打开 [Visual Basic Editor](CreateAMacro.md#visual-basic-editor)，点击菜单栏中的 <U>I</U>nsert ，选择插入一个 <U>M</U>odule.
+1. 打開 [Visual Basic Editor](CreateAMacro.md#visual-basic-editor)，點擊菜單欄中的 <U>I</U>nsert ，選擇插入一個 <U>M</U>odule.
 
-2. 添加如下代码：
+2. 添加如下代碼：
 
 ```
 Function Triple(ByRef x As Integer) As Integer
@@ -615,13 +615,13 @@ Triple = x
 End Function
 ```
 
-当点击 command button 的时候显示如下结果：
+當點擊 command button 的時候顯示如下結果：
 
 ![Alt text](/doc/source/images/ByRefandByVal/byref-result.png)
 
 ![Alt text](/doc/source/images/ByRefandByVal/byref-result.png)
 
-3. 使用 `ByVal`替换`ByRef`:
+3. 使用 `ByVal`替換`ByRef`:
 
 ```
 Function Triple(ByVal x As Integer) As Integer
@@ -631,26 +631,26 @@ Triple = x
 
 End Function
 ```
-当点击 command button 的时候显示如下结果为：
+當點擊 command button 的時候顯示如下結果爲：
 
 ![Alt text](/doc/source/images/ByRefandByVal/byref-result.png)
 
 ![Alt text](/doc/source/images/ByRefandByVal/byval-result-2.png)
 
-**说明：** 当通过引用(ByRef)传递参数时，我们引用的是原始值。函数中`x`的值(原始值)发生了变化。因此，第二个MsgBox显示的值为30。当通过值传递(ByVal)参数时，我们是在向函数传递一个副本。原始值没有改变。因此，第二个MsgBox显示的值为10(原始值)。
+**說明：** 當通過引用(ByRef)傳遞參數時，我們引用的是原始值。函數中`x`的值(原始值)發生了變化。因此，第二個MsgBox顯示的值爲30。當通過值傳遞(ByVal)參數時，我們是在向函數傳遞一個副本。原始值沒有改變。因此，第二個MsgBox顯示的值爲10(原始值)。
 
-**总结：**
-**ByRef** 传递一个指向变量的指针，因此任何更改都会在使用该变量的任何地方反映出来（改变一处，其他所有使用该变量的地方均会改变）。   
-**ByVal** 将变量的副本传递给函数，因此对该变量的任何更改都不会影响其原始值。当使用ByVal传递一个对象，你传递的是一个指针的拷贝而不是原始的指针(**注意:** 不是对象的拷贝)
+**總結：**
+**ByRef** 傳遞一個指向變量的指針，因此任何更改都會在使用該變量的任何地方反映出來（改變一處，其他所有使用該變量的地方均會改變）。   
+**ByVal** 將變量的副本傳遞給函數，因此對該變量的任何更改都不會影響其原始值。當使用ByVal傳遞一個對象，你傳遞的是一個指針的拷貝而不是原始的指針(**注意:** 不是對象的拷貝)
 
 
 **注意：**
 
-1. 数组变量（Array）总是通过ByRef传递（只适用于实际声明为 *Array* 的变量，不适用于`Variants`声明的数组变量）。
-2. VBA在不具体指定传值方式的时候，默认为`ByRef`方式传值。
+1. 數組變量（Array）總是通過ByRef傳遞（只適用於實際聲明爲 *Array* 的變量，不適用於`Variants`聲明的數組變量）。
+2. VBA在不具體指定傳值方式的時候，默認爲`ByRef`方式傳值。
 
 ```
-Function Triple(x As Integer) As Integer '当不声明指定具体值传递还是引用传递的时候，VBA默认为 ByRef 方式传值
+Function Triple(x As Integer) As Integer '當不聲明指定具體值傳遞還是引用傳遞的時候，VBA默認爲 ByRef 方式傳值
 
 'Or
 
@@ -659,40 +659,40 @@ Function Triple(ByRef x As Integer) As Integer
 ```
 
 <a name="1.7"></a>
-### 1.7 正则表达式(Regular Expression)
-在VBA中使用正则表达式，因为正则表达式不是vba自有的对象，
-故此要用它就必须采用两种方式引用它：一种是前期绑定，另外一种是后期绑定。
+### 1.7 正則表達式(Regular Expression)
+在VBA中使用正則表達式，因爲正則表達式不是vba自有的對象，
+故此要用它就必須採用兩種方式引用它：一種是前期綁定，另外一種是後期綁定。
 
-前期绑定：就是手工勾选工具/引用中的Microsoft VBScript Regular Expressions 5.5；
-然后在代码中定义对象：`Dim regExp As New RegExp`；</br>
-后期绑定：使用CreateObject方法定义对象：`CreateObject("vbscript.regexp")`
+前期綁定：就是手工勾選工具/引用中的Microsoft VBScript Regular Expressions 5.5；
+然後在代碼中定義對象：`Dim regExp As New RegExp`；</br>
+後期綁定：使用CreateObject方法定義對象：`CreateObject("vbscript.regexp")`
 
-RegExp对象的属性：
-   - Global – 设置或返回一个Boolean值，该值指明在整个搜索字符串时模式是全部匹配还是只匹配第一个。如果搜索应用于整个字符串，Global 属性的值应该为 True，否则其值为 False。默认的设置为True。
-   - Multiline – 返回正则表达式是否具有标志, 缺省值为False。如果指定的搜索字符串分布在多行，这个属性是要设置为True的。
-   - IgnoreCase – 设置或返回一个Boolean值，指明模式搜索是否区分大小写。如果搜索是区分大小写的，则IgnoreCase 属性应该为False；否则应该设为True。缺省值为True。
-   - Pattern – 设置或返回被搜索的正则表达式模式。被搜索的正则字符串表达式。它包含各种正则表达式字符。
+RegExp對象的屬性：
+   - Global – 設置或返回一個Boolean值，該值指明在整個搜索字符串時模式是全部匹配還是隻匹配第一個。如果搜索應用於整個字符串，Global 屬性的值應該爲 True，否則其值爲 False。默認的設置爲True。
+   - Multiline – 返回正則表達式是否具有標誌, 缺省值爲False。如果指定的搜索字符串分佈在多行，這個屬性是要設置爲True的。
+   - IgnoreCase – 設置或返回一個Boolean值，指明模式搜索是否區分大小寫。如果搜索是區分大小寫的，則IgnoreCase 屬性應該爲False；否則應該設爲True。缺省值爲True。
+   - Pattern – 設置或返回被搜索的正則表達式模式。被搜索的正則字符串表達式。它包含各種正則表達式字符。
 
-RegExp对象的方法：
-- Execute – 对指定的字符串执行正则表达式搜索。需要传入要在其上执行正则表达式的文本字符串。正则表达式搜索的设计模式是通过RegExp对象的Pattern来设置的。Execute方法返回一个Matches集合，其中包含了在string中找到的每一个匹配的Match对象。如果未找到匹配，Execute将返回空的Matches集合。
-- Replace – 替换在正则表达式查找中找到的文本。
-- Test – 对指定的字符串执行一个正则表达式搜索，并返回一个Boolean值指示是否找到匹配的模式。Global属性对Test方法没有影响。如果找到了匹配的模式，Test方法返回True；否则返回False。
-- MatchCollection对象与Match对象
-匹配到的所有对象放在MatchCollection集合中，这个集合对象只有两个只读属性：
-- Count：匹配到的对象的数目
-- Item：集合的又一通用方法，需要传入Index值获取指定的元素。
-一般，可以使用ForEach语句枚举集合中的对象。集合中对象的类型是Match。
-- Match对象有以下几个只读的属性：
-    - FirstIndex – 匹配字符串在整个字符串中的位置，值从0开始。
-    - Length – 匹配字符串的长度。
+RegExp對象的方法：
+- Execute – 對指定的字符串執行正則表達式搜索。需要傳入要在其上執行正則表達式的文本字符串。正則表達式搜索的設計模式是通過RegExp對象的Pattern來設置的。Execute方法返回一個Matches集合，其中包含了在string中找到的每一個匹配的Match對象。如果未找到匹配，Execute將返回空的Matches集合。
+- Replace – 替換在正則表達式查找中找到的文本。
+- Test – 對指定的字符串執行一個正則表達式搜索，並返回一個Boolean值指示是否找到匹配的模式。Global屬性對Test方法沒有影響。如果找到了匹配的模式，Test方法返回True；否則返回False。
+- MatchCollection對象與Match對象
+匹配到的所有對象放在MatchCollection集合中，這個集合對象只有兩個只讀屬性：
+- Count：匹配到的對象的數目
+- Item：集合的又一通用方法，需要傳入Index值獲取指定的元素。
+一般，可以使用ForEach語句枚舉集合中的對象。集合中對象的類型是Match。
+- Match對象有以下幾個只讀的屬性：
+    - FirstIndex – 匹配字符串在整個字符串中的位置，值從0開始。
+    - Length – 匹配字符串的長度。
     - Value – 匹配的字符串。
-    - SubMatches – 集合，匹配字符串中每个分组的值。作为集合类型，有Count和Item两个属性。
+    - SubMatches – 集合，匹配字符串中每個分組的值。作爲集合類型，有Count和Item兩個屬性。
 
-Sample Code（前期绑定）：
+Sample Code（前期綁定）：
 ```vba
 Private Function IsStringDate(ByVal strDate As String)
     Dim strDatePattern
-    ' 前期绑定
+    ' 前期綁定
     Dim regEx As New RegExp, matches
 
     Dim str MatchContent As String
@@ -700,13 +700,13 @@ Private Function IsStringDate(ByVal strDate As String)
     strDatePattern = "^(([0-9])|([0-2][0-9])|([3][0-1]))\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\-\d{4}$"
 
     With regEx
-        .Global = True      ' 搜索字符串中的全部字符，如果为假，则找到匹配的字符就停止搜索！
+        .Global = True      ' 搜索字符串中的全部字符，如果爲假，則找到匹配的字符就停止搜索！
         .MultiLine = False  ' 是否指定多行搜索
-        .IgnoreCase = True  ' 指定大小写敏感（True）
-        .Pattern = strDatePattern   ' 所匹配的正则
+        .IgnoreCase = True  ' 指定大小寫敏感（True）
+        .Pattern = strDatePattern   ' 所匹配的正則
     End With
 
-    If regEx.Test(strDate) Then     ' 如果与正则相匹配
+    If regEx.Test(strDate) Then     ' 如果與正則相匹配
         Set matches = regEx.Execute(strDate)
         MatchContent = matches(0).Value
     Else
@@ -718,32 +718,32 @@ Private Function IsStringDate(ByVal strDate As String)
 End Function
 ```
 
-Sample Code（后期绑定）：
+Sample Code（後期綁定）：
 ```vba
 Function ExtractNumber(str As String) As String
     Dim regEx As Object
-    Set regEx = CreateObject("vbscript.regexp")  ' 后期绑定
+    Set regEx = CreateObject("vbscript.regexp")  ' 後期綁定
     With regEx
-        .Global = True       ' 搜索字符串中的全部字符，如果为假，则找到匹配的字符就停止搜索！
-        .Pattern = "\D"      ' 非数字字符的正则表达式
-        ExtractNumber = .Replace(str, "")        ' 把非数字字符替换成空字符串
+        .Global = True       ' 搜索字符串中的全部字符，如果爲假，則找到匹配的字符就停止搜索！
+        .Pattern = "\D"      ' 非數字字符的正則表達式
+        ExtractNumber = .Replace(str, "")        ' 把非數字字符替換成空字符串
     End With
-    Set regEx = Nothing      ' 清除内存中的对象变量的地址，即释放内存。
+    Set regEx = Nothing      ' 清除內存中的對象變量的地址，即釋放內存。
 End Function
 ```
 
 <a name="1.8"></a>
-### 1.8 注释（Comments code）
-> 个人觉得代码注释起着非常重要的作用。 --  *bluetata* 11/28/2018 18:40
+### 1.8 註釋（Comments code）
+> 個人覺得代碼註釋起着非常重要的作用。 --  *bluetata* 11/28/2018 18:40
 
-注释语句是用来说明程序中某些语句的功能和作用；VBA 中有两种方法标识为注释语句。</br>
-单引号 `'` 举例：`' 定义全局变量`；可以位于别的语句之尾，也可单独一行。</br>
-`Rem` 举例：`Rem 定义全局变量`；只能单独一行
+註釋語句是用來說明程序中某些語句的功能和作用；VBA 中有兩種方法標識爲註釋語句。</br>
+單引號 `'` 舉例：`' 定義全局變量`；可以位於別的語句之尾，也可單獨一行。</br>
+`Rem` 舉例：`Rem 定義全局變量`；只能單獨一行
 
-以下列举出了不同级别的注释代码，也可以[点击这里](SampleCode.bas)查看 VBA Sample Code。
+以下列舉出了不同級別的註釋代碼，也可以[點擊這裏](SampleCode.bas)查看 VBA Sample Code。
 
-#### 1. 源码概要注释/Source version Comments Code</br>
-在每个source文件的最开头
+#### 1. 源碼概要註釋/Source version Comments Code</br>
+在每個source文件的最開頭
 ```vba
 '--------------------------------------
 ' Creation date : 03/05/2017  (cn)
@@ -754,9 +754,9 @@ End Function
 '--------------------------------------
 ```
 
-#### 2. 区块注释/Use Title Blocks Comments code for Each Macro</br>
-在每个Function或者Sub上下，根据个人风格，可以在紧贴在函数上面一行处，
-也可以在函数名的下面一行处。
+#### 2. 區塊註釋/Use Title Blocks Comments code for Each Macro</br>
+在每個Function或者Sub上下，根據個人風格，可以在緊貼在函數上面一行處，
+也可以在函數名的下面一行處。
 ```vba
 '=======================================================
 ' Program:   DoMemoData
@@ -781,7 +781,7 @@ End Function
 Sub DoMemoData(wbkReport As Workbook, oStopRow As Long)
 ```
 
-#### 3. 行内注释/Use In-Line Comments
+#### 3. 行內註釋/Use In-Line Comments
 ```vba
 ' If this routine was called by the batch routine...
 If g_bCalledByBatch Then
@@ -801,8 +801,8 @@ If g_bCalledByBatch Then
 Else
 ```
 
-#### 4. 函数列表注释/List of Function Comments</br>
-一般紧挨着源码概要注释下面，与其空一行到两行
+#### 4. 函數列表註釋/List of Function Comments</br>
+一般緊挨着源碼概要註釋下面，與其空一行到兩行
 ```vba
 '-------------------------------------
 ' List of functions :
@@ -816,96 +816,96 @@ Else
 ```
 
 <a name="1.9"></a>
-### 1.9 补充
+### 1.9 補充
 
-- 在vba中使用 `'`进行代码注释
-- 在很长的语句中使用`_`来分割成多行
-- 在有很多嵌套判断中，代码的可读性会变得很差，一般讲需要返回的内容及时返回，减少嵌套
-- `Sub`中默认按引用传递参数，所以注意使用，一般不要对外面的变量进行修改，将封装保留在内部
+- 在vba中使用 `'`進行代碼註釋
+- 在很長的語句中使用`_`來分割成多行
+- 在有很多嵌套判斷中，代碼的可讀性會變得很差，一般講需要返回的內容及時返回，減少嵌套
+- `Sub`中默認按引用傳遞參數，所以注意使用，一般不要對外面的變量進行修改，將封裝保留在內部
 
 
-- `Dim`和`Set`的关系及区分
+- `Dim`和`Set`的關係及區分
 
-很明显的是 vba中使用Dim设定变量类型，Set将对象引用赋值给变量
+很明顯的是 vba中使用Dim設定變量類型，Set將對象引用賦值給變量
 
 ```vba
-' 将Range对象赋值给变量rg
-Dim rg As Range         ' 声明rg为Range对象
-Set rg = Range("A1")    ' 设定rg为Range("A1")的引用，之后操作rg和操作Range("A1")一样了
+' 將Range對象賦值給變量rg
+Dim rg As Range         ' 聲明rg爲Range對象
+Set rg = Range("A1")    ' 設定rg爲Range("A1")的引用，之後操作rg和操作Range("A1")一樣了
 
-' 如果不使用Set，下面的代码将报错
+' 如果不使用Set，下面的代碼將報錯
 Dim rg As Range
-rg = Range("A1")   ' 这段代码将报错
+rg = Range("A1")   ' 這段代碼將報錯
 
-' 在非显示声明rg的前提下，下面的代码将会得到不一样的结果
-rg = Range("A1")       ' rg将会是Range("A1")的内容，rg的类型将会是一种基本类型，Integer/String等
-Set rg = Range("A1")   ' 这种情况下，rg将会是Range对象
+' 在非顯示聲明rg的前提下，下面的代碼將會得到不一樣的結果
+rg = Range("A1")       ' rg將會是Range("A1")的內容，rg的類型將會是一種基本類型，Integer/String等
+Set rg = Range("A1")   ' 這種情況下，rg將會是Range對象
 ```
 
-- VBA中变量用Dim定义和不用Dim定义而直接使用有何区别？
+- VBA中變量用Dim定義和不用Dim定義而直接使用有何區別？
 
-用Dim语句声明变量就是定义该变量应存储的数据类型；
-如果不指定数据类型或对象类型，也就是不用Dim定义，且在模块中没有 `Deftype` 语句，
-则该变量按缺省设置是 `Variant` 类型。
+用Dim語句聲明變量就是定義該變量應存儲的數據類型；
+如果不指定數據類型或對象類型，也就是不用Dim定義，且在模塊中沒有 `Deftype` 語句，
+則該變量按缺省設置是 `Variant` 類型。
 
-- VBA中用Set赋值和不用Set赋值有什么区别？
+- VBA中用Set賦值和不用Set賦值有什麼區別？
 
-给普通变量赋值使用`Let`，Let 可以**省略**。</br>
-给对象变量赋值使用`Set`，Set **不能** 省略。
+給普通變量賦值使用`Let`，Let 可以**省略**。</br>
+給對象變量賦值使用`Set`，Set **不能** 省略。
 
 ```vba
 Sub AssignString()
     Dim strA As String
     Dim strB As String
 
-    strA = "hello"      ' 本句也可写成 LET strA = "hello"
-    Set strB = "hello"  ' 错误写法/Compile error
+    strA = "hello"      ' 本句也可寫成 LET strA = "hello"
+    Set strB = "hello"  ' 錯誤寫法/Compile error
 EndSub
 ```
 
 <a name="1.10"></a>
 ### 1.10 示例
 
-举个排序的例子，要对`A1:A20`的单元格区域进行排序，区域内的内容为1-100的随机整数，
-规则是大于50的倒序排列，小于50的正序排列。将结果显示在`B1:B20`的区域里。
+舉個排序的例子，要對`A1:A20`的單元格區域進行排序，區域內的內容爲1-100的隨機整數，
+規則是大於50的倒序排列，小於50的正序排列。將結果顯示在`B1:B20`的區域裏。
 
-在这个例子中，首先定义一个`Sub`过程来随机生成`A1:A20`区域的内容。
-代码如下:
+在這個例子中，首先定義一個`Sub`過程來隨機生成`A1:A20`區域的內容。
+代碼如下:
 
 ![Alt text](/doc/source/images/demo1.1.gif)
 
 ```vba
-' 创建随机整数，并赋值
+' 創建隨機整數，並賦值
 Sub createRandom(times As Integer)
     Dim num As Integer
     Dim arr() As Integer
     ReDim arr(times)
 
     For num = 1 To times
-        Randomize (1) ' 初始化随机数
-        arr(num) = Rnd(1) * 10000 \ 100 ' Rnd随机数函数生成0~1的浮点数
-        ' 上面使用了运算符进行取整，也可以根据需求使用vba内部的取整函数达到同样的效果
+        Randomize (1) ' 初始化隨機數
+        arr(num) = Rnd(1) * 10000 \ 100 ' Rnd隨機數函數生成0~1的浮點數
+        ' 上面使用了運算符進行取整，也可以根據需求使用vba內部的取整函數達到同樣的效果
         ' arr(num) = Int(Rnd(1) * 100)
         ' arr(num) = Round(Rnd(1) * 100)
         Range("A" & num) = arr(num)
     Next num
 End Sub
 
-' 自定义排序
+' 自定義排序
 Function defSort(rgs) As Variant
     Dim arr() As Integer
     Dim total As Integer
     Dim rg
-    Dim st As Integer  ' 数组开始标记
-    Dim ed As Integer  ' 数组结束标记
+    Dim st As Integer  ' 數組開始標記
+    Dim ed As Integer  ' 數組結束標記
 
-    Debug.Print "rgs类型:"; TypeName(rgs)
+    Debug.Print "rgs類型:"; TypeName(rgs)
     total = UBound(rgs)
     ReDim arr(total)
     st = 1
     ed = total
 
-    ' 对数组分区
+    ' 對數組分區
     For Each rg In rgs
         If rg > 50 Then
             arr(ed) = rg
@@ -923,21 +923,21 @@ Function defSort(rgs) As Variant
     ' 冒泡排序
     For i = 1 To total
         For j = i To total
-            If arr(i) > 50 And arr(j) > 50 Then '大于50的倒序排列
+            If arr(i) > 50 And arr(j) > 50 Then '大於50的倒序排列
                 If arr(i) < arr(j) Then
                     tmp = arr(i)
                     arr(i) = arr(j)
                     arr(j) = tmp
 
-                    Debug.Print "大于50的"; i; j; tmp ' 程序运行过程中在立即窗口显示执行内容，用于调试程序
+                    Debug.Print "大於50的"; i; j; tmp ' 程序運行過程中在立即窗口顯示執行內容，用於調試程序
                 End If
-            Else If arr(i) <= 50 And arr(j) <= 50 Then ' 小于50的正序排列
+            Else If arr(i) <= 50 And arr(j) <= 50 Then ' 小於50的正序排列
                 If arr(i) > arr(j) Then
                     tmp = arr(i)
                     arr(i) = arr(j)
                     arr(j) = tmp
 
-                    Debug.Print "不大于50的"; i; j; tmp
+                    Debug.Print "不大於50的"; i; j; tmp
                 End If
             Else
                 Exit For
@@ -954,12 +954,12 @@ Sub main()
     Dim rgs
     Dim arr
 
-    createRandom SORT_NUM ' 初始化待排序区域
+    createRandom SORT_NUM ' 初始化待排序區域
 
     rgs = range("A1:A" & SORT_NUM)
     arr = defSort(rgs)
 
-    ' 循环赋值
+    ' 循環賦值
     For i = 1 To SORT_NUM
         range("B" & i) = arr(i)
     Next i
@@ -968,30 +968,30 @@ End Sub
 
 
 <a name="layout"></a>
-## 0x02 VBA界面介绍
+## 0x02 VBA界面介紹
 
 <a name="2.1"></a>
-### 2.1 整体界面说明
+### 2.1 整體界面說明
 
-（点击图片查看大图）   
+（點擊圖片查看大圖）   
 ![Alt text](/doc/source/images/1505749555407.png)
 
 <a name="2.2"></a>
-### 2.2 工程资源管理器（Project Explore）说明
+### 2.2 工程資源管理器（Project Explore）說明
 
-显示快捷键：`Ctrl + R`，也可以点击菜单栏 View -> <u>P</u>roject Explore 显示。
-在一个VBA项目中，实际可以在5个代码模块中书写VBA代码，如下图所示：
+顯示快捷鍵：`Ctrl + R`，也可以點擊菜單欄 View -> <u>P</u>roject Explore 顯示。
+在一個VBA項目中，實際可以在5個代碼模塊中書寫VBA代碼，如下圖所示：
 
 ![Alt text](/doc/source/images/vba_code_modules.png)
 
-1. Code Modules – Code Modules是我们存储宏的最常见的地方。
-模块位于工作簿中的 `Modules` 文件夹中。
+1. Code Modules – Code Modules是我們存儲宏的最常見的地方。
+模塊位於工作簿中的 `Modules` 文件夾中。
 
-2. Sheet Modules – 工作簿中的每个工作表在Microsoft Excel Objects文件夹中
-都有一个工作表对象。双击sheet对象就会打开它的代码模块，我们可以在其中添加事件过程(宏)。
-这些宏在用户执行表单中的特定操作时运行。比如如下code：
-如果在该sheet中的选择位置发生改变，就会*自动执行* `Worksheet_SelectionChange` 方法，
-选择所选单元格的整个行和列。
+2. Sheet Modules – 工作簿中的每個工作表在Microsoft Excel Objects文件夾中
+都有一個工作表對象。雙擊sheet對象就會打開它的代碼模塊，我們可以在其中添加事件過程(宏)。
+這些宏在用戶執行表單中的特定操作時運行。比如如下code：
+如果在該sheet中的選擇位置發生改變，就會*自動執行* `Worksheet_SelectionChange` 方法，
+選擇所選單元格的整個行和列。
 
 ```VBA
 Private Sub Worksheet_SelectionChange(ByVal Target As Range) ' Worksheet_SelectionChange
@@ -1006,64 +1006,64 @@ Private Sub Worksheet_SelectionChange(ByVal Target As Range) ' Worksheet_Selecti
 End Sub
 ```
 
-3. ThisWorkbook Module – 每个工作簿都包含一个 `ThisWorkbook` 对象，
-其总是位于和工作表对象相同的文件夹(Microsoft Excel Objects)内的最底部。
-我们可以在这个工作簿中运行基于事件的宏。
+3. ThisWorkbook Module – 每個工作簿都包含一個 `ThisWorkbook` 對象，
+其總是位於和工作表對象相同的文件夾(Microsoft Excel Objects)內的最底部。
+我們可以在這個工作簿中運行基於事件的宏。
 
-4. Userforms – 做过VB项目的人对这个应该不会陌生。在这个模块下我们可以创建Windows窗体，
-进行图形化交互。在这个模块写的code大部分都是和win窗体相关的代码。
+4. Userforms – 做過VB項目的人對這個應該不會陌生。在這個模塊下我們可以創建Windows窗體，
+進行圖形化交互。在這個模塊寫的code大部分都是和win窗體相關的代碼。
 
-5. Class Modules – 在`Class Modules`文件夹中，允许我们编写宏来创建对象、属性和方法。
-当我们想要创建对象库中不存在的自定义对象或集合时，可以使用该类模块。
+5. Class Modules – 在`Class Modules`文件夾中，允許我們編寫宏來創建對象、屬性和方法。
+當我們想要創建對象庫中不存在的自定義對象或集合時，可以使用該類模塊。
 
-**总结**：`Modules`、 `ThisWorkbook`、 `Sheet` 三者区别：
+**總結**：`Modules`、 `ThisWorkbook`、 `Sheet` 三者區別：
 
-`Modules` 是相似功能和子程序的集合，通常根据功能进行分组。
+`Modules` 是相似功能和子程序的集合，通常根據功能進行分組。
 
-`ThisWorkbook` 是Workbook对象的私有模块。
-例如，Workbook_Open()，Workbook_Close() 例程驻留在此模块中。
-（[工作簿对象参考](https://docs.microsoft.com/zh-cn/office/vba/api/excel.workbook)）
+`ThisWorkbook` 是Workbook對象的私有模塊。
+例如，Workbook_Open()，Workbook_Close() 例程駐留在此模塊中。
+（[工作簿對象參考](https://docs.microsoft.com/zh-cn/office/vba/api/excel.workbook)）
 
-`Sheet1`，`Sheet2` 是单个工作表的私有模块。在它们中，您将会放入该表的特定功能。
+`Sheet1`，`Sheet2` 是單個工作表的私有模塊。在它們中，您將會放入該表的特定功能。
 例如：`Worksheet_Activate` ， `Worksheet_Deactivate` ， `Workbook_SheetChange`
-是提供给的默认事件，这样你就可以在各自的私有工作表模块中处理它们。
-（[工作表对象参考](https://msdn.microsoft.com/en-us/library/office/ff847327.aspx)）
+是提供給的默認事件，這樣你就可以在各自的私有工作表模塊中處理它們。
+（[工作表對象參考](https://msdn.microsoft.com/en-us/library/office/ff847327.aspx)）
 
-在模块里使用Cells、range等时表示的是当前激活的工作表；而在sheet里面写的话，
-为当前工作表里的cells，如果你在sheet1代码里要引用其他工作表的话，不能这样。
+在模塊裏使用Cells、range等時表示的是當前激活的工作表；而在sheet裏面寫的話，
+爲當前工作表裏的cells，如果你在sheet1代碼裏要引用其他工作表的話，不能這樣。
 
 ```vba
 sheet2.select
 cells(1, 1) = 1
 ```
 
-因为你的代码在sheet1下，cells就一定是sheet1的
+因爲你的代碼在sheet1下，cells就一定是sheet1的
 另外，在sheet下面可以使用Me，表示自身
-如sheet1.visible = False，可以简化为: Me.visible = False
+如sheet1.visible = False，可以簡化爲: Me.visible = False
 
-如果一个Funtion是在`Modules`里定义的，那么就可以在任意的Worksheet里调用，
-但如果只是在Worksheet里定义的Funtion，其他的Worksheet是调用不了的。
-也就是说，模块（Modules）是公共的地方。
+如果一個Funtion是在`Modules`裏定義的，那麼就可以在任意的Worksheet裏調用，
+但如果只是在Worksheet裏定義的Funtion，其他的Worksheet是調用不了的。
+也就是說，模塊（Modules）是公共的地方。
 
 
 <a name="2.3"></a>
-### 2.3 设置VBA Macro Project 密码保护
+### 2.3 設置VBA Macro Project 密碼保護
 
-#### 2.3.1 利用密码保护工作表或者sheet
+#### 2.3.1 利用密碼保護工作表或者sheet
 
-在VBA编辑界面依次点击：<u>T</u>ools → VBAProject Prop<u>e</u>rties…
+在VBA編輯界面依次點擊：<u>T</u>ools → VBAProject Prop<u>e</u>rties…
 
 ![Alt text](/doc/source/images/password_protect_setting_1.png)
 
 
-在弹出界面选择 `Projection`，勾选 `Lock project for viewing`后，输入密码，如下图所示：
+在彈出界面選擇 `Projection`，勾選 `Lock project for viewing`後，輸入密碼，如下圖所示：
 
 ![Alt text](/doc/source/images/password_protect_setting_2.png)
 
 
-#### 2.3.2 Macro执行时密码保护
+#### 2.3.2 Macro執行時密碼保護
 
-如果想要使用密码控制Macro是否可以运行，可以参考如下代码：
+如果想要使用密碼控制Macro是否可以運行，可以參考如下代碼：
 ```
 Dim password As Variant
 password = Application.InputBox("Enter Password", "Password Protected")
@@ -1071,8 +1071,8 @@ password = Application.InputBox("Enter Password", "Password Protected")
 Select Case password
     Case Is = False
         ' do nothing
-    Case Is = "P@ssw0rd"  ' 验证密码
-        Range("A1").Value = "This is secret code"   ' 执行密码保护的代码块。
+    Case Is = "P@ssw0rd"  ' 驗證密碼
+        Range("A1").Value = "This is secret code"   ' 執行密碼保護的代碼塊。
     Case Else
         MsgBox "Incorrect Password"
 End Select
@@ -1080,57 +1080,57 @@ End Select
 
 
 <a name="2.4"></a>
-### 2.4 常用快捷栏及窗口设置
-默认情况下某些常用的窗口VBA界面是不显示的，比如立即窗口，编辑操作捷栏（批量注释取消等）
+### 2.4 常用快捷欄及窗口設置
+默認情況下某些常用的窗口VBA界面是不顯示的，比如立即窗口，編輯操作捷欄（批量註釋取消等）
 
-#### 2.4.1 显示编辑栏
-鼠标右键点击空白的快捷栏位置，勾选 `Edit` 选项会显示出如下快捷栏
+#### 2.4.1 顯示編輯欄
+鼠標右鍵點擊空白的快捷欄位置，勾選 `Edit` 選項會顯示出如下快捷欄
 
 ![Alt text](/doc/source/images/toolbars_edit_setting.png)
 
-#### 2.4.2 显示立即窗口(Immediate window)
-Immediate window（立即窗口）：类似其他IDE的console控制台。</br>
-显示快捷键：`Ctrl + G`，也可以点击菜单栏 View -> <u>I</u>mmediate window 显示。</br>
-当在调试debug的时候，可以使用`Debug.Print "xxxlog"`的时候可以在该窗口直接显示打印结果。
+#### 2.4.2 顯示立即窗口(Immediate window)
+Immediate window（立即窗口）：類似其他IDE的console控制檯。</br>
+顯示快捷鍵：`Ctrl + G`，也可以點擊菜單欄 View -> <u>I</u>mmediate window 顯示。</br>
+當在調試debug的時候，可以使用`Debug.Print "xxxlog"`的時候可以在該窗口直接顯示打印結果。
 
 <a name="object-option"></a>
-## 0x03 对象操作说明
-Excel中的每个单元格，工作簿都是可以操作的对象；可以对对象进行复制、粘贴、删除等，
-也可操作对象的各种属性，来控制其展示和行为。
+## 0x03 對象操作說明
+Excel中的每個單元格，工作簿都是可以操作的對象；可以對對象進行復制、粘貼、刪除等，
+也可操作對象的各種屬性，來控制其展示和行爲。
 
-在Excel中，对象有不同的层级关系:
+在Excel中，對象有不同的層級關係:
 
 ![Alt text](/doc/source/images/1505548045994.png)
 
-实际上Excel中可操作的对象远不止这些，具体的可以参考
-[Excel 对象模型](https://msdn.microsoft.com/zh-cn/library/office/ff194068.aspx)
+實際上Excel中可操作的對象遠不止這些，具體的可以參考
+[Excel 對象模型](https://msdn.microsoft.com/zh-cn/library/office/ff194068.aspx)
 
-类似于数组，将各种类型的对象封装到一块可以组成集合。
-一个集合中调用对象的例子：
+類似於數組，將各種類型的對象封裝到一塊可以組成集合。
+一個集合中調用對象的例子：
 ![Alt text](/doc/source/images/1505548422147.png)
 
 
 <a name="3.1"></a>
-### 3.1 对象简述
+### 3.1 對象簡述
 
-对象一般包含下面三种特性：
+對象一般包含下面三種特性：
 
-- 属性
+- 屬性
 
-属性表示对象的特征，一般为名词。例如`Workbook.ActiveSheet`表示工作簿当前
-处于激活状态的工作表对象。
+屬性表示對象的特徵，一般爲名詞。例如`Workbook.ActiveSheet`表示工作簿當前
+處於激活狀態的工作表對象。
 
 - 方法
 
-方法表示对象可用的操作或可执行的动作。例如`Workbook.Activate`表示
-激活工作簿的第一个工作表。
+方法表示對象可用的操作或可執行的動作。例如`Workbook.Activate`表示
+激活工作簿的第一個工作表。
 
 - 事件
 
-事件表示对象可以被触发的行为，一般触发后会执行对应的代码。
-例如`Workbook.Activate`表示工作簿中的工作表被激活了，然后执行对应的方法。
+事件表示對象可以被觸發的行爲，一般觸發後會執行對應的代碼。
+例如`Workbook.Activate`表示工作簿中的工作表被激活了，然後執行對應的方法。
 
-下面的代码就是在`Workbook`被打开时，将工作簿最大化的例子。
+下面的代碼就是在`Workbook`被打開時，將工作簿最大化的例子。
 
 ```vba
 Private Sub Workbook_Open()
@@ -1138,46 +1138,46 @@ Private Sub Workbook_Open()
 End Sub
 ```
 
-VBA中有很多对象，常用的对象如下:
+VBA中有很多對象，常用的對象如下:
 
-|对象|对象说明| 文档地址|
+|對象|對象說明| 文檔地址|
 |----|----|----|
-|Application|代表Excel应用程序|[文档](https://msdn.microsoft.com/zh-cn/library/ff194565.aspx)|
-|Workbook|代表Excel的工作簿|[文档](https://msdn.microsoft.com/zh-cn/library/ff835568.aspx)|
-|Worksheet|代表Excel的工作表|[文档](https://msdn.microsoft.com/zh-cn/library/ff194464.aspx)|
-|Range|代表Excel的单元格，可以是单个单元格或单元格区域|[文档](https://msdn.microsoft.com/zh-cn/library/office/ff838238.aspx)|
+|Application|代表Excel應用程序|[文檔](https://msdn.microsoft.com/zh-cn/library/ff194565.aspx)|
+|Workbook|代表Excel的工作簿|[文檔](https://msdn.microsoft.com/zh-cn/library/ff835568.aspx)|
+|Worksheet|代表Excel的工作表|[文檔](https://msdn.microsoft.com/zh-cn/library/ff194464.aspx)|
+|Range|代表Excel的單元格，可以是單個單元格或單元格區域|[文檔](https://msdn.microsoft.com/zh-cn/library/office/ff838238.aspx)|
 
 
 <a name="3.2"></a>
-### 3.2 Application对象
-    参照Application对象[官方文档](https://docs.microsoft.com/zh-CN/office/vba/api/Excel.Application(object))
-### 3.3 Range对象
+### 3.2 Application對象
+    參照Application對象[官方文檔](https://docs.microsoft.com/zh-CN/office/vba/api/Excel.Application(object))
+### 3.3 Range對象
 ![Alt text](/doc/source/images/1505548886377.png)
 
 ![Alt text](/doc/source/images/1505549069568.png)
 
 <a name="string-option"></a>
-## 0x04 字符串String相关常用操作
+## 0x04 字符串String相關常用操作
 
 
 <a name="4.1"></a>
 ### 4.1 Trim
-`Trim`函数删除给定输入字符串的前导空格和尾随空格。</br>
-语法：Trim(String)
+`Trim`函數刪除給定輸入字符串的前導空格和尾隨空格。</br>
+語法：Trim(String)
 
 <a name="4.2"></a>
 ### 4.2 Instr 和 InStrRev
-`InStr`函数返回一个字符串第一次出现在一个字符串，从左到右搜索。返回搜索到的字符索引位置。</br>
-`InStrRev`函数与`InStr`功能相同，从**右**到左搜索。返回搜索到的字符索引位置。
+`InStr`函數返回一個字符串第一次出現在一個字符串，從左到右搜索。返回搜索到的字符索引位置。</br>
+`InStrRev`函數與`InStr`功能相同，從**右**到左搜索。返回搜索到的字符索引位置。
 
-语法：InStr([start, ]string1, string2[, compare])
-参数：
-   * Start   - 一个可选参数。指定搜索的起始位置。搜索从第一个位置开始，从左到右。
-   * String1 - 必需的参数。要搜索的字符串。
-   * String2 - 必需的参数。要在String1中搜索的字符串。
-   * Compare - 一个可选参数。指定要使用的字符串比较。它可以采取以下提到的值：
-       - 0 = vbBinaryCompare - 执行二进制比较(默认)
-       - 1 = vbTextCompare - 执行文本比较
+語法：InStr([start, ]string1, string2[, compare])
+參數：
+   * Start   - 一個可選參數。指定搜索的起始位置。搜索從第一個位置開始，從左到右。
+   * String1 - 必需的參數。要搜索的字符串。
+   * String2 - 必需的參數。要在String1中搜索的字符串。
+   * Compare - 一個可選參數。指定要使用的字符串比較。它可以採取以下提到的值：
+       - 0 = vbBinaryCompare - 執行二進制比較(默認)
+       - 1 = vbTextCompare - 執行文本比較
 
 ```vba
 Private Sub Constant_demo_Click()
@@ -1195,12 +1195,12 @@ End Sub
 
 <a name="4.3"></a>
 ### 4.3 Mid
-`Mid`函数返回给定输入字符串中指定数量的字符。</br>
-语法：Mid(String, start[, Length])</br>
-参数：
-   - String - 必需的参数。输入从中返回指定数量的字符的字符串。
-   - Start - 必需的参数。一个整数，它指定了字符串的起始位置。
-   - Length - 必需的参数。一个整数，指定要返回的字符数。
+`Mid`函數返回給定輸入字符串中指定數量的字符。</br>
+語法：Mid(String, start[, Length])</br>
+參數：
+   - String - 必需的參數。輸入從中返回指定數量的字符的字符串。
+   - Start - 必需的參數。一個整數，它指定了字符串的起始位置。
+   - Length - 必需的參數。一個整數，指定要返回的字符數。
 
 ```vba
     Private Sub Constant_demo_Click()
@@ -1214,11 +1214,11 @@ End Sub
 
 <a name="4.4"></a>
 ### 4.4 Left 和 Right
-`Left` 和 `Right` 截取字符串，从左或者从右开始。</br>
-语法：Left(String, Length)</br>
-参数：
-   - String - 必需的参数。 输入从左侧返回指定数量的字符的字符串。
-   - Length - 必需的参数。 一个整数，指定要返回的字符数。
+`Left` 和 `Right` 截取字符串，從左或者從右開始。</br>
+語法：Left(String, Length)</br>
+參數：
+   - String - 必需的參數。 輸入從左側返回指定數量的字符的字符串。
+   - Length - 必需的參數。 一個整數，指定要返回的字符數。
 ```vba
 Private Sub Constant_demo_Click()
     Dim var as Variant
@@ -1235,18 +1235,18 @@ End Sub
 ```
 
 <a name="4.5"></a>
-### 4.5 Replace 函数
-`Replace` 函数 将一个字符串替换另一个字符串，可指定的次数。</br>
-语法：Replace(string, findString, replaceWith[, start[, count[, compare]]])</br>
-参数：
-   - String - 必需的参数。需要被搜索的字符串。
-   - findString - 必需的参数。将被替换的字符串部分。
-   - replaceWith - 必需的参数。用于替换的子字符串。
-   - start - 可选的参数。规定开始位置。默认是 1。
-   - count - 规定指定替换的次数。默认是 -1，表示进行所有可能的替换。
-   - compare - 可选的参数。规定所使用的字符串比较类型。
-       - 0 = vbBinaryCompare - 执行二进制比较(默认)
-       - 1 = vbTextCompare - 执行文本比较
+### 4.5 Replace 函數
+`Replace` 函數 將一個字符串替換另一個字符串，可指定的次數。</br>
+語法：Replace(string, findString, replaceWith[, start[, count[, compare]]])</br>
+參數：
+   - String - 必需的參數。需要被搜索的字符串。
+   - findString - 必需的參數。將被替換的字符串部分。
+   - replaceWith - 必需的參數。用於替換的子字符串。
+   - start - 可選的參數。規定開始位置。默認是 1。
+   - count - 規定指定替換的次數。默認是 -1，表示進行所有可能的替換。
+   - compare - 可選的參數。規定所使用的字符串比較類型。
+       - 0 = vbBinaryCompare - 執行二進制比較(默認)
+       - 1 = vbTextCompare - 執行文本比較
 
 示例：</br>
 ```vba
@@ -1256,8 +1256,8 @@ Debug.Print Replace(txt, "beautiful", "horrible")   ' This is a horrible day!
 ```
 
 <a name="4.6"></a>
-### 4.6 StrReverse 倒转函数
-语法：StrReverse(string) </br>
+### 4.6 StrReverse 倒轉函數
+語法：StrReverse(string) </br>
 示例：</br>
 ```vba
 Private Sub StrReverse_Demo()
@@ -1268,37 +1268,37 @@ End Sub
 ```
 
 <a name="4.7"></a>
-### 4.7 其他字符串函数
-- `&` 字符串连接操作，在VBA中连个字符串连接使用`&`进行连接
+### 4.7 其他字符串函數
+- `&` 字符串連接操作，在VBA中連個字符串連接使用`&`進行連接
 - `Ltrim(string)` 去掉 string 左端空白
 - `Rtrim(string)` 去掉 string 右端空白
-- `Len(string)` 计算 string 长度
-- `Lcase(string)` 和 `Ucase(string)` 转换为小写和大写
+- `Len(string)` 計算 string 長度
+- `Lcase(string)` 和 `Ucase(string)` 轉換爲小寫和大寫
 
 
 <a name="excel-option"></a>
-## 0x05 Excel 相关常用操作
+## 0x05 Excel 相關常用操作
 
 <a name="5.1"></a>
-### 5.1 Excel 基础操作
+### 5.1 Excel 基礎操作
 
-1. Range相关
-Range 属性的一些 A1 样式引用
+1. Range相關
+Range 屬性的一些 A1 樣式引用
 ```vba
-Range("A1")             ' 单元格 A1
-Range("A1:B5")          ' 从单元格 A1 到单元格 B5 的区域
-Range("C5:D9, G9:H16")  ' 多块选定区域
-' 选中不关联的单元格，cells(2, 3)返回结果为：B3
+Range("A1")             ' 單元格 A1
+Range("A1:B5")          ' 從單元格 A1 到單元格 B5 的區域
+Range("C5:D9, G9:H16")  ' 多塊選定區域
+' 選中不關聯的單元格，cells(2, 3)返回結果爲：B3
 Union(Range("A1:A10"), Range("K10"), Range("A1:" & cells(2, 3).Address)).Select
 Range("A:A")            ' A 列
 Range("1:1")            ' 第一行
-Range("A:C")            ' 从 A 列到 C 列的区域
-Range("1:5")            ' 从第一行到第五行的区域
+Range("A:C")            ' 從 A 列到 C 列的區域
+Range("1:5")            ' 從第一行到第五行的區域
 Range("1:1, 3:3, 8:8")  ' 第 1、3 和 8 行
 Range("A:A, C:C, F:F")  ' A 、C 和 F 列
 ```
 
-2. 行列相关
+2. 行列相關
 行和列的引用
 ```vba
 Rows(1)         ' 第一行
@@ -1308,7 +1308,7 @@ Columns("A")    ' 第一列
 Columns         ' 工作表上所有的列
 Union(Rows(1), Rows(3), Rows(5))  ' 引用第1, 3, 5行
 ```
-3. 循环Selction区域的每一个单元格Cell
+3. 循環Selction區域的每一個單元格Cell
 ```vba
 For Each rngDataCell In RngDataSelection
     If Not rngDataCell.HasFormula And Not (Trim(rngDataCell.Value)  = "") Then
@@ -1317,79 +1317,79 @@ For Each rngDataCell In RngDataSelection
 Next rngDataCell
 ```
 
-4. 选择当前工作表中的单元格
+4. 選擇當前工作表中的單元格
 ```vba
 ActiveSheet.Cells(5, 4).Select
 或：ActiveSheet.Range("D5").Select
 ```
 
-5. 选择同一工作簿中其它工作表上的单元格
+5. 選擇同一工作簿中其它工作表上的單元格
 ```vba
 Application.Goto (ActiveWorkbook.Sheets("Sheet2").Range("E6"))
-' 也可以先激活该工作表，然后再选择：
+' 也可以先激活該工作表，然後再選擇：
 Sheets("Sheet2").Activate
 ActiveSheet.Cells(6, 5).Select
 ```
 
-6. 选择与当前单元格相关的单元格/偏离当前单元格(Offset)</br>
-语法：Offset(D, R) 以当前为基础原点，向下D，且向右D移动，如果负数即为向反方向移动
-即向上和向左移动。</br>
-例如，要选择距当前单元格下面5行左侧4列的单元格
+6. 選擇與當前單元格相關的單元格/偏離當前單元格(Offset)</br>
+語法：Offset(D, R) 以當前爲基礎原點，向下D，且向右D移動，如果負數即爲向反方向移動
+即向上和向左移動。</br>
+例如，要選擇距當前單元格下面5行左側4列的單元格
 ```vba
 ActiveCell.Offset(5, -4).Select
 ```
 
-7. 选择一个指定的区域并扩展区域的大小
+7. 選擇一個指定的區域並擴展區域的大小
 ```vba
-' 要选择当前工作表中名为“Database”区域，然后将该区域向下扩展5行，可以使用下面的代码：
+' 要選擇當前工作表中名爲“Database”區域，然後將該區域向下擴展5行，可以使用下面的代碼：
 Range("Database").Select
 Selection.Resize(Selection.Rows.Count + 5, Selection.Columns.Count).Select
 ```
 
-8. 选择一个指定的区域，再偏离，然后扩展区域的大小
+8. 選擇一個指定的區域，再偏離，然後擴展區域的大小
 ```vba
-' 选择名为“Database”区域下方4行右侧3列的一个区域，然后扩展2行和1列，可以使用下面的代码：
+' 選擇名爲“Database”區域下方4行右側3列的一個區域，然後擴展2行和1列，可以使用下面的代碼：
 Range("Database").Select
 Selection.Offset(4, 3).Resize(Selection.Rows.Count + 2, Selection.Columns.Count + 1).Select
 ```
 
-9. 同时选择两个或多个指定区域</br>
-**注意**：所选区域必须在同一工作表(sheet)中。
+9. 同時選擇兩個或多個指定區域</br>
+**注意**：所選區域必須在同一工作表(sheet)中。
 ```vba
 Set rngUnionSelection = Application.Union(Range("Sheet1!A1:B2"), Range("Sheet1!C3:D4"))
 ```
 
-10. 选择两个或多个指定区域的交叉区域
-**注意**：所选区域必须在同一工作表(sheet)中。
+10. 選擇兩個或多個指定區域的交叉區域
+**注意**：所選區域必須在同一工作表(sheet)中。
 ```vba
-' 要选择名为“Test1”和“Test2”的两个区域的交叉区域
+' 要選擇名爲“Test1”和“Test2”的兩個區域的交叉區域
 Application.Intersect(Range("Test1"), Range("Test2")).Select
 ```
 
-11. 利用End函数的相关操作
+11. 利用End函數的相關操作
 
-End(xldown)：从被选中的单元格向下寻找，如果被选中单元格为空，则一直向下走到
-第一个非空单元格；如果被选中单元格为非空，则向下走到最后一个非空单元格。</br>
-`End`函数的4个方向参数：xlUp, xlDown, xlToLeft, xlToRight。
+End(xldown)：從被選中的單元格向下尋找，如果被選中單元格爲空，則一直向下走到
+第一個非空單元格；如果被選中單元格爲非空，則向下走到最後一個非空單元格。</br>
+`End`函數的4個方向參數：xlUp, xlDown, xlToLeft, xlToRight。
 
 ```vba
-' 选择连续数据列中的最后一个单元格
+' 選擇連續數據列中的最後一個單元格
 ActiveSheet.Range("a1").End(xlDown).Select
-' 选择连续数据列底部的空单元格
+' 選擇連續數據列底部的空單元格
 ActiveSheet.Range("a1").End(xlDown).Offset(1, 0).Select
-' 获取连续数据最后一行的行号
+' 獲取連續數據最後一行的行號
 Selection.end(xldown).Row
-' 想选择连续数据最后面的空白行
+' 想選擇連續數據最後面的空白行
 Rows(Selection.End(xldown).Row + 1).Select
-' 选择某列中连续数据单元格区域
+' 選擇某列中連續數據單元格區域
 ActiveSheet.Range("A1", ActiveSheet.Range("a1").End(xlDown)).Select
 ActiveSheet.Range("A1:" & ActiveSheet.Range("a1").End(xlDown).Address).Select
-' 选择某列中非连续数据单元格区域
+' 選擇某列中非連續數據單元格區域
 ActiveSheet.Range("A1", ActiveSheet.Range("a65536").End(xlUp)).Select
 ActiveSheet.Range("A1:" & ActiveSheet.Range("a65536").End(xlUp).Address).Select
 ```
 
-补充： 对于上述代码中非连续数据，也可以利用UsedRange.Rows.Count获取所有数据的条/行数。
+補充： 對於上述代碼中非連續數據，也可以利用UsedRange.Rows.Count獲取所有數據的條/行數。
 ```vba
 Dim lngCountData As Long
 lngCountData = ActiveSheet.UsedRange.Rows.Count
@@ -1397,20 +1397,20 @@ lngCountData = ActiveSheet.UsedRange.Rows.Count
 
 
 <a name="5.2"></a>
-### 5.2 打开Excel两种方式
+### 5.2 打開Excel兩種方式
 
-- 利用 `GetObject` 方法打开Excel文档
+- 利用 `GetObject` 方法打開Excel文檔
 ```vba
     Sub GetWorkbook()
         Dim wbWorkFile As Workbook
         Set wbWorkFile = GetObject("D:\test.xlsx")
-        ' wbWorkFile.Windows(1).Visible = True ' 这种方法打开的文件是隐藏的，如果需要显示，则设置Visible值为ture
+        ' wbWorkFile.Windows(1).Visible = True ' 這種方法打開的文件是隱藏的，如果需要顯示，則設置Visible值爲ture
         wbWorkFile.Close False
         Set wbWorkFile = Nothing
     End Sub
 ```
 
-- 利用 `Open` 方法打开Excel文档
+- 利用 `Open` 方法打開Excel文檔
 ```vba
 Sub OpenWorkbook()
     Dim wbWorkFile As Workbook
@@ -1421,40 +1421,40 @@ Sub OpenWorkbook()
 End Sub
 ```
 
-延伸其扩展方法：
-- GetObject封装方法，可以作为共通Function
+延伸其擴展方法：
+- GetObject封裝方法，可以作爲共通Function
 
 ```vba
 Sub GetWorkbook()
-    Dim objExcel                As Object       ' 用于存放Microsoft Excel 引用的变量。
-    Dim blnExcelWasNotRunning   As Boolean      ' 用于最后释放的标记。
+    Dim objExcel                As Object       ' 用於存放Microsoft Excel 引用的變量。
+    Dim blnExcelWasNotRunning   As Boolean      ' 用於最後釋放的標記。
 
-    ' 测试 Microsoft Excel 的副本是否在运行。
-    On Error Resume Next                        ' 延迟错误捕获。
-    ' 不带第一个参数调用 Getobject 函数将返回对该应用程序的实例的引用。如果该应用程序不在运行，则会产生错误。
+    ' 測試 Microsoft Excel 的副本是否在運行。
+    On Error Resume Next                        ' 延遲錯誤捕獲。
+    ' 不帶第一個參數調用 Getobject 函數將返回對該應用程序的實例的引用。如果該應用程序不在運行，則會產生錯誤。
     Set objExcel = Getobject(, "Excel.Application")
     If Err.Number <> 0 Then blnExcelWasNotRunning = True
-    Err.Clear                                   ' 如果发生错误则要清除 Err 对象。
+    Err.Clear                                   ' 如果發生錯誤則要清除 Err 對象。
 
-    Set objExcel = Getobject("C:\excel.xlsx")   ' 将对象变量设为对要看的文件的引用。
+    Set objExcel = Getobject("C:\excel.xlsx")   ' 將對象變量設爲對要看的文件的引用。
 
-    ' 设置其 Application 属性，显示 Microsoft Excel。然后使用 objExcel 对象引用的 Windows 集合显示包含该文件的实际窗口。
+    ' 設置其 Application 屬性，顯示 Microsoft Excel。然後使用 objExcel 對象引用的 Windows 集合顯示包含該文件的實際窗口。
     objExcel.Application.Visible = True
     objExcel.Parent.Windows(1).Visible = True
-    ' 在此处对文件进行操作。
+    ' 在此處對文件進行操作。
     ' ...
-    ' 如果在启动时，Microsoft Excel 的这份副本不在运行中，则使用 Application 属性的 Quit 方法来关闭它。
-    ' 注意，当试图退出 Microsoft Excel 时，标题栏会闪烁，并显示一条消息询问是否保存所加载的文件。
+    ' 如果在啓動時，Microsoft Excel 的這份副本不在運行中，則使用 Application 屬性的 Quit 方法來關閉它。
+    ' 注意，當試圖退出 Microsoft Excel 時，標題欄會閃爍，並顯示一條消息詢問是否保存所加載的文件。
     If blnExcelWasNotRunning = True Then
         objExcel.Application.Quit
     End IF
 
-    Set objExcel = Nothing   ' 释放对该应用程序
+    Set objExcel = Nothing   ' 釋放對該應用程序
 
 End Sub
 ```
 
-- OpenWorkbook封装方法，可以作为共通Function
+- OpenWorkbook封裝方法，可以作爲共通Function
 
 ```vba
 Function OpenWorkbook(ByVal strWorkbookFilePath As String)
@@ -1477,70 +1477,70 @@ End Function
 <a name="5.3"></a>
 ### 5.3 操作Excel工作表（Worksheet）
 
-#### 5.3.1 移动工作表
+#### 5.3.1 移動工作表
 
-移动工作表是指将工作表移到工作簿中的其他位置。
-在VBA中，可以使用WorkSheet.Move方法来移动工作表。
+移動工作表是指將工作表移到工作簿中的其他位置。
+在VBA中，可以使用WorkSheet.Move方法來移動工作表。
 
-语法：表达式.Move(Before, After)
-其中，在Move方法中，主要包含两个参数，其功能如下：
+語法：表達式.Move(Before, After)
+其中，在Move方法中，主要包含兩個參數，其功能如下：
 
-Before 在其之前放置移动工作表的工作表。如果指定了After，则不能指定Before。
-After 在其之后放置移动工作表的工作表。如果指定了Before，则不能指定After。
-例如：移动 "工资表" 至Sheet3工作表之后，可以输入以下代码：
+Before 在其之前放置移動工作表的工作表。如果指定了After，則不能指定Before。
+After 在其之後放置移動工作表的工作表。如果指定了Before，則不能指定After。
+例如：移動 "工資表" 至Sheet3工作表之後，可以輸入以下代碼：
 
 ```vba
-Sub 移动工作表()
-    Sheets("工资表").Select
-    Sheets("工资表").Move After:=Sheets(3)
+Sub 移動工作表()
+    Sheets("工資表").Select
+    Sheets("工資表").Move After:=Sheets(3)
 End Sub
 ```
 
-另外，如果既不指定Before也不指定After，Microsoft Excel将新建一个工作簿，
-其中包含所移动的工作表。例如，输入以下代码，即可新建一个工作簿，
-且该工作表中包含有 "工资表" 工作表。
+另外，如果既不指定Before也不指定After，Microsoft Excel將新建一個工作簿，
+其中包含所移動的工作表。例如，輸入以下代碼，即可新建一個工作簿，
+且該工作表中包含有 "工資表" 工作表。
 
 ```vba
 Sub A()
-    Sheets("工资表").Move
+    Sheets("工資表").Move
 End Sub
 ```
 
-#### 5.3.2 复制工作表
+#### 5.3.2 複製工作表
 
-复制工作表是指将工作表进行备份，以便于用户对备份文件进行操作时，不会损坏原有文件。
-在VBA中，使用Sheets.Copy方法可以将工作表复制到工作簿的另一位置。
-语法：
+複製工作表是指將工作表進行備份，以便於用戶對備份文件進行操作時，不會損壞原有文件。
+在VBA中，使用Sheets.Copy方法可以將工作表複製到工作簿的另一位置。
+語法：
 
 ```vba
-表达式.Copy(Before, After)
+表達式.Copy(Before, After)
 ```
 
-其中，在Copy方法中，包含的两个参数与在Move方法中的参数相似，其参数功能如下：
-Before 将要在其之前放置所复制工作表的工作表。如果指定了After，则不能指定Before。
-After 将要在其之后放置所复制工作表的工作表。如果指定了Before，则不能指定After。
-例如：复制 "工资表" 表格至Sheet3工作表之后，可以输入以下代码：
+其中，在Copy方法中，包含的兩個參數與在Move方法中的參數相似，其參數功能如下：
+Before 將要在其之前放置所複製工作表的工作表。如果指定了After，則不能指定Before。
+After 將要在其之後放置所複製工作表的工作表。如果指定了Before，則不能指定After。
+例如：複製 "工資表" 表格至Sheet3工作表之後，可以輸入以下代碼：
 
 ```vba
-Sub 复制工作表()
-    Sheets("工资表").Select
-    Sheets("工资表").Copy After:=Sheets(3)
+Sub 複製工作表()
+    Sheets("工資表").Select
+    Sheets("工資表").Copy After:=Sheets(3)
 End Sub
 ```
 
-另外，用户还可以在不同的工作簿之间进行复制。
-例如：将当前工作簿中的“工资表”工作表复制到打开的Book1工作表中，可以输入以下代码：
+另外，用戶還可以在不同的工作簿之間進行復制。
+例如：將當前工作簿中的“工資表”工作表複製到打開的Book1工作表中，可以輸入以下代碼：
 
 ```vba
-Sub 复制工作表至Book1中()
-    Sheets("工资表").Copy After:=Workbooks("Book1").Sheets(1)
+Sub 複製工作表至Book1中()
+    Sheets("工資表").Copy After:=Workbooks("Book1").Sheets(1)
 End Sub
 ```
 
 <a name="5.4"></a>
-### 5.4 Excel AutoFilter / Excel 自动筛选操作
+### 5.4 Excel AutoFilter / Excel 自動篩選操作
 
-#### 5.4.1 显示所有数据记录
+#### 5.4.1 顯示所有數據記錄
 ```vba
 Sub ShowAllRecords()
     If ActiveSheet.FilterMode Then
@@ -1549,9 +1549,9 @@ Sub ShowAllRecords()
 End Sub
 ```
 
-#### 5.4.2 开关Excel自动筛选
+#### 5.4.2 開關Excel自動篩選
 
-先判断是否有自动筛选，如果没有为A1添加一个自动筛选
+先判斷是否有自動篩選，如果沒有爲A1添加一個自動篩選
 ```vba
 Sub TurnAutoFilterOn()
     'check for filter, turn on if none exists
@@ -1561,7 +1561,7 @@ Sub TurnAutoFilterOn()
 End Sub
 ```
 
-清除自动筛选
+清除自動篩選
 ```vba
 Sub TurnFilterOff()
     'removes AutoFilter if one exists
@@ -1569,9 +1569,9 @@ Sub TurnFilterOff()
 End Sub
 ```
 
-#### 5.4.3 隐藏过滤箭头
+#### 5.4.3 隱藏過濾箭頭
 
-隐藏所有的箭头
+隱藏所有的箭頭
 ```vba
 Sub HideALLArrows()
     'hides all arrows in heading row
@@ -1593,7 +1593,7 @@ Sub HideALLArrows()
 End Sub
 ```
 
-只保留一个箭头，其他的过滤箭头全隐藏
+只保留一個箭頭，其他的過濾箭頭全隱藏
 
 ![Alt text](doc/source/images/autofiltermacros01.png)
 
@@ -1625,7 +1625,7 @@ Application.ScreenUpdating = True
 End Sub
 ```
 
-隐藏部分箭头
+隱藏部分箭頭
 
 ![Alt text](doc/source/images/autofiltermacros02.png)
 
@@ -1655,7 +1655,7 @@ Sub HideArrowsSpecificFields()
 End Sub
 ```
 
-#### 5.4.4 复制所有的过滤后的数据
+#### 5.4.4 複製所有的過濾後的數據
 
 ```vba
 Sub CopyFilter()
@@ -1682,9 +1682,9 @@ Sub CopyFilter()
 End Sub
 ```
 
-#### 5.4.5 检查是否有自动筛选：
+#### 5.4.5 檢查是否有自動篩選：
 
-可以打开立即窗口，即类似于控制台的 Immediate Window，快捷键：`Ctrl+G` ,查看如下code的
+可以打開立即窗口，即類似於控制檯的 Immediate Window，快捷鍵：`Ctrl+G` ,查看如下code的
 iARM的打印值。
 
 ![Alt text](doc/source/images/autofiltermacros03.png)
@@ -1701,21 +1701,21 @@ End Sub
 
 
 <a name="5.5"></a>
-### 5.5 清理Excel数据相关操作
+### 5.5 清理Excel數據相關操作
 
-#### 5.5.1 清理单元格或Range中的内容
+#### 5.5.1 清理單元格或Range中的內容
 
-如若清空某个选中的单元格中的数据，使用的API为：`ClearContents`。   
+如若清空某個選中的單元格中的數據，使用的API爲：`ClearContents`。   
 示例：
 ```vba
 Range("A1").Select
 Selection.ClearContents
 ```
 
-#### 5.5.1 清理/删除Excel中第一个标题行以外的所有行
+#### 5.5.1 清理/刪除Excel中第一個標題行以外的所有行
 
-同样使用ClearContents方法，主要是确定如何选中除第一行以外的表格。   
-示例代码如下：
+同樣使用ClearContents方法，主要是確定如何選中除第一行以外的表格。   
+示例代碼如下：
 ```vba
 Sub ClearContentExceptFirst()
     Rows("2:" & Rows.Count).ClearContents
@@ -1723,12 +1723,12 @@ End Sub
 ```
 
 <a name="0x06"></a>
-## 0x06 文件，文件夹等 相关常用操作
+## 0x06 文件，文件夾等 相關常用操作
 
-以下文件，文件夹等相关方法可自行封装成共通(common function)以便项目中使用。
+以下文件，文件夾等相關方法可自行封裝成共通(common function)以便項目中使用。
 
 <a name="6.1"></a>
-### 6.1 判断文件，文件夹等是否存在
+### 6.1 判斷文件，文件夾等是否存在
 1. 文件是否存在（File exists）：
 ```vba
 Sub FileExists()
@@ -1742,7 +1742,7 @@ Sub FileExists()
 End Sub
 ```
 
-2. 文件夹是否存在（Folder exists）：
+2. 文件夾是否存在（Folder exists）：
 ```vba
 Sub FolderExists()
     Dim fso as Scripting.FileSystemObject
@@ -1755,7 +1755,7 @@ Sub FolderExists()
 End Sub
 ```
 
-3. 硬盘是否存在（Drive exists）：
+3. 硬盤是否存在（Drive exists）：
 ```vba
 Sub DriveExists()
     Dim fso as Scripting.FileSystemObject
@@ -1769,8 +1769,8 @@ End Sub
 ```
 
 <a name="6.2"></a>
-### 6.2 文件相关操作
-1. 文件复制（File copy）：
+### 6.2 文件相關操作
+1. 文件複製（File copy）：
 ```vba
 Sub CopyFile()
     Dim fso as Scripting.FileSystemObject
@@ -1779,7 +1779,7 @@ Sub CopyFile()
 End Sub
 ```
 
-2. 文件移动（File move）：
+2. 文件移動（File move）：
 ```vba
 Sub MoveFile()
     Dim fso as Scripting.FileSystemObject
@@ -1788,7 +1788,7 @@ Sub MoveFile()
 End Sub
 ```
 
-3. 文件删除（File delete）：
+3. 文件刪除（File delete）：
 ```vba
     Sub DeleteFile()
     Dim fso
@@ -1798,9 +1798,9 @@ End Sub
 ```
 
 <a name="6.3"></a>
-### 6.3 文件夹相关操作
+### 6.3 文件夾相關操作
 
-1. 创建文件夹（Folder create）：
+1. 創建文件夾（Folder create）：
 ```vba
 Sub CreateFolder()
     Dim fso as Scripting.FileSystemObject
@@ -1809,7 +1809,7 @@ Sub CreateFolder()
 End Sub
 ```
 
-2. 复制文件夹（Folder copy）：
+2. 複製文件夾（Folder copy）：
 ```vba
 Sub CopyFolder()
     Dim fso as Scripting.FileSystemObject
@@ -1818,7 +1818,7 @@ Sub CopyFolder()
 End Sub
 ```
 
-3. 移动文件夹（Folder move）：
+3. 移動文件夾（Folder move）：
 ```vba
 Sub MoveFolder()
     Dim fso as Scripting.FileSystemObject
@@ -1827,7 +1827,7 @@ Sub MoveFolder()
 End Sub
 ```
 
-4. 删除文件件（Folder delete）：
+4. 刪除文件件（Folder delete）：
 ```vba
 Sub DeleteFolder()
     Dim fso as Scripting.FileSystemObject
@@ -1837,9 +1837,9 @@ End Sub
 ```
 
 <a name="6.4"></a>
-### 6.4 其他操作（获取文件名等）
+### 6.4 其他操作（獲取文件名等）
 
-1. 获取文件全名，带有后缀（Get file name）
+1. 獲取文件全名，帶有後綴（Get file name）
 ```vba
 Sub GetFileName()
     Dim fso as Scripting.FileSystemObject
@@ -1848,7 +1848,7 @@ Sub GetFileName()
 End Sub
 ```
 
-2. 获取文件名，无后缀（Get base name）
+2. 獲取文件名，無後綴（Get base name）
 ```vba
 Sub GetBaseName()
     Dim fso as Scripting.FileSystemObject
@@ -1857,7 +1857,7 @@ Sub GetBaseName()
 End Sub
 ```
 
-3. 获取文件后缀格式（Get extension name）
+3. 獲取文件後綴格式（Get extension name）
 ```vba
 Sub GetExtensionName()
     Dim fso as Scripting.FileSystemObject
@@ -1866,7 +1866,7 @@ Sub GetExtensionName()
 End Sub
 ```
 
-4. 获取盘符名（Get drive name）
+4. 獲取盤符名（Get drive name）
 ```vba
 Sub GetDriveName()
     Dim fso as Scripting.FileSystemObject
@@ -1877,17 +1877,17 @@ End Sub
 
 
 <a name="0x07"></a>
-## 0x07 日期和时间 相关函数
+## 0x07 日期和時間 相關函數
 
 
 <a name="7.1"></a>
-### 7.1 Date, Time, Now 函数
+### 7.1 Date, Time, Now 函數
 
-`Date` 函数返回当前的系统日期。   
-`Time` 函数返回当前的系统时间。   
-`Now`  函数返回当前的系统日期和时间。   
+`Date` 函數返回當前的系統日期。   
+`Time` 函數返回當前的系統時間。   
+`Now`  函數返回當前的系統日期和時間。   
 
-**注意：** 如果同时读取 Date、Time 以及 Now，那么 Now = Date + Time，但是实际上，我们不可能同时调用这三个函数，因为执行完一个函数之后，才能执行另一个函数，所以如果您在程序中必需同时取得当时的日期和时间，必需调用 Now，再利用 DateVale 及 TimeValue 分别取出日期和时间。
+**注意：** 如果同時讀取 Date、Time 以及 Now，那麼 Now = Date + Time，但是實際上，我們不可能同時調用這三個函數，因爲執行完一個函數之後，才能執行另一個函數，所以如果您在程序中必需同時取得當時的日期和時間，必需調用 Now，再利用 DateVale 及 TimeValue 分別取出日期和時間。
 
 
 ```
@@ -1899,9 +1899,9 @@ End Sub
 ```
 
 <a name="7.2"></a>
-### 7.2 日期函数：Year, Month, Day
+### 7.2 日期函數：Year, Month, Day
 
-`Year`, `Month`, `Day` 函数分别返回 **数字格式** 的年，月，日。
+`Year`, `Month`, `Day` 函數分別返回 **數字格式** 的年，月，日。
 
 ```
 Dim exampleDate As Date
@@ -1915,27 +1915,27 @@ MsgBox Day(exampleDate)   ' 19
 
 
 <a name="7.3"></a>
-### 7.3 CDate 和 DateValue 函数
-VBA中的CDate和DateValue的区别(Difference between CDate and DateValue in VBA)
+### 7.3 CDate 和 DateValue 函數
+VBA中的CDate和DateValue的區別(Difference between CDate and DateValue in VBA)
 
-1. `CDate` 函数可把一个合法的日期和时间 *表达式* 转换为 `Date` 类型，并返回结果。
+1. `CDate` 函數可把一個合法的日期和時間 *表達式* 轉換爲 `Date` 類型，並返回結果。
 
-**提示：** 请使用 [IsDate](#7.4) 函数来判断 date 是否可被转换为日期或时间。
+**提示：** 請使用 [IsDate](#7.4) 函數來判斷 date 是否可被轉換爲日期或時間。
 
-※　举例参照如下小节
+※　舉例參照如下小節
 
-2. DateValue(date) 函数 返回一Date类型数据
+2. DateValue(date) 函數 返回一Date類型數據
 
-*date* 参数通常是一个字符串表达式, 表示从100年1月1日到9999年12月31日之间的日期。 但是，*date* 还可是任何表示该范围内的日期、时间或日期和时间的表达式。
+*date* 參數通常是一個字符串表達式, 表示從100年1月1日到9999年12月31日之間的日期。 但是，*date* 還可是任何表示該範圍內的日期、時間或日期和時間的表達式。
 
-**备注（Reference From [MSDN](https://docs.microsoft.com/zh-cn/office/vba/language/reference/user-interface-help/datevalue-function)）：** 如果 *date* 是一个仅包含由有效日期分隔符分隔的数字的字符串, 则DateValue将根据您为系统指定的短日期格式识别月、日和年的顺序。 DateValue 还能清楚地识别包含月名称（长名称或简写形式）的日期。 例如，除了识别 12/30/1991 和 12/30/91 之外，DateValue 还识别 December 30, 1991 和 Dec 30, 1991。
-如果省略 date 的年部分，则 DateValue 将使用计算机系统日期中的当前年。
-如果 date 参数包含时间信息，则 DateValue 将不会返回它。 但是，如果 date 包含的时间信息无效（如“89:98”），则将出错。
+**備註（Reference From [MSDN](https://docs.microsoft.com/zh-cn/office/vba/language/reference/user-interface-help/datevalue-function)）：** 如果 *date* 是一個僅包含由有效日期分隔符分隔的數字的字符串, 則DateValue將根據您爲系統指定的短日期格式識別月、日和年的順序。 DateValue 還能清楚地識別包含月名稱（長名稱或簡寫形式）的日期。 例如，除了識別 12/30/1991 和 12/30/91 之外，DateValue 還識別 December 30, 1991 和 Dec 30, 1991。
+如果省略 date 的年部分，則 DateValue 將使用計算機系統日期中的當前年。
+如果 date 參數包含時間信息，則 DateValue 將不會返回它。 但是，如果 date 包含的時間信息無效（如“89:98”），則將出錯。
 
 
-CDate与DateValue的举例：   
+CDate與DateValue的舉例：   
 ```
-' 举例1：
+' 舉例1：
 d1 = "April 22, 2001"
 d2 = "6:15:45 PM"
 d3 = "2014-07-24 15:43:06"
@@ -1952,7 +1952,7 @@ End If
 ```
 
 ```
-' 举例2：
+' 舉例2：
 MsgBox CDate(43972)             ' 5/21/2020
 MsgBox CDate("12/25/2020")      ' 1/15/2014
 
@@ -1961,17 +1961,17 @@ MsgBox DateValue(43972)         ' Throws a Type mismatch error(Run-time error 13
 ```
 
 
-**总结：** CDate和DateValue的区别：   
-* 从上述 *举例1* 代码结果总结出，`DateValue` 只返回一个Date类型结果，而`CDate`返回结果将保留日期和时间，当参数为一个时间类型的时候，`DateValue` 只能返回一个 `00:00:00`的结果。
+**總結：** CDate和DateValue的區別：   
+* 從上述 *舉例1* 代碼結果總結出，`DateValue` 只返回一個Date類型結果，而`CDate`返回結果將保留日期和時間，當參數爲一個時間類型的時候，`DateValue` 只能返回一個 `00:00:00`的結果。
 
-* 从上述 *举例2* 代码结果总结出，另外，`DateValue` (或`TimeValue`)只接受 `String` 类型的参数，而 `CDate` 也可以处理 **数字** 。可使用`CDate(Int(num))`和`CDate(num - Int(num))`函数。
+* 從上述 *舉例2* 代碼結果總結出，另外，`DateValue` (或`TimeValue`)只接受 `String` 類型的參數，而 `CDate` 也可以處理 **數字** 。可使用`CDate(Int(num))`和`CDate(num - Int(num))`函數。
 
 
 <a name="7.4"></a>
-### 7.4 IsDate 函数
-`IsDate` 函数返回一个布尔值，用于判断一个表达式是否可被转换为日期。如果表达式是日期，或可被转换为日期，则返回 True 。否则，返回 False 。
+### 7.4 IsDate 函數
+`IsDate` 函數返回一個布爾值，用於判斷一個表達式是否可被轉換爲日期。如果表達式是日期，或可被轉換爲日期，則返回 True 。否則，返回 False 。
 
-**注释：** `IsDate` 函数使用本地设置来检测字符串是否可以转换为日期。在 Windows 中, 有效日期的范围是公元100年1月1日至公元9999年12月31日;各操作系统的范围各不相同。
+**註釋：** `IsDate` 函數使用本地設置來檢測字符串是否可以轉換爲日期。在 Windows 中, 有效日期的範圍是公元100年1月1日至公元9999年12月31日;各操作系統的範圍各不相同。
 
 示例：   
 ```
@@ -1997,17 +1997,17 @@ MyCheck = IsDate(MyVar)     ' Returns False.
 
 
 <a name="7.5"></a>
-### 7.5 DateAdd 函数
+### 7.5 DateAdd 函數
 
-`DateAdd` 函数可返回已添加指定时间间隔的日期。
+`DateAdd` 函數可返回已添加指定時間間隔的日期。
 
-语法：DateAdd(*interval, number, date*)
+語法：DateAdd(*interval, number, date*)
 
-| 参数 | 描述 |
+| 參數 | 描述 |
 |--------|-------|
-|interval|必需的。需要增加的时间间隔。</br>可采用下面的值：</br>yyyy - 年   </br>q - 季度          </br>m - 月          </br>y - 当年的第几天          </br>d - 日          </br>w - 当周的第几天          </br>ww - 周          </br>h - 小时          </br>n - 分钟          </br>s - 秒|
-|number|必需的。需要添加的时间间隔的数目。可对未来的日期使用正值，对过去的日期使用负值。|
-|date|必需的。代表被添加的时间间隔的日期的变量或文字。|
+|interval|必需的。需要增加的時間間隔。</br>可採用下面的值：</br>yyyy - 年   </br>q - 季度          </br>m - 月          </br>y - 當年的第幾天          </br>d - 日          </br>w - 當週的第幾天          </br>ww - 周          </br>h - 小時          </br>n - 分鐘          </br>s - 秒|
+|number|必需的。需要添加的時間間隔的數目。可對未來的日期使用正值，對過去的日期使用負值。|
+|date|必需的。代表被添加的時間間隔的日期的變量或文字。|
 
 示例：
 
@@ -2017,17 +2017,17 @@ DateAdd("m",1,"31-Jan-00")    ' 2/29/2000
 DateAdd("m",-1,"31-Jan-01")   ' 12/31/2000
 ```
 
-在此情况下，DateAdd 返回 2001 年 2 月 28 日，而不是 2001 年 2 月 31 日。 如果 date 为 2000 年 1 月 31 日，则它将返回 2000 年 2 月 29 日，因为 2000 年是闰年。
+在此情況下，DateAdd 返回 2001 年 2 月 28 日，而不是 2001 年 2 月 31 日。 如果 date 爲 2000 年 1 月 31 日，則它將返回 2000 年 2 月 29 日，因爲 2000 年是閏年。
 
-如果计算的日期位于年份数 100 前（即，你减去的年份数大于 date 中的年份，则出现错误。
+如果計算的日期位於年份數 100 前（即，你減去的年份數大於 date 中的年份，則出現錯誤。
 
-如果 *number* 不是 Long 值，则在计算之前将其 **四舍五入** 到最接近的整数。
+如果 *number* 不是 Long 值，則在計算之前將其 **四捨五入** 到最接近的整數。
 
-**另外：** 在使用“w”时间间隔（包括一周的所有天，从星期日到星期六）向日期添加天数时，DateAdd 函数会向日期添加您指定的总天数，而不是像您预期的那样仅向日期添加工作日（从星期一到星期五）数。
+**另外：** 在使用“w”時間間隔（包括一週的所有天，從星期日到星期六）向日期添加天數時，DateAdd 函數會向日期添加您指定的總天數，而不是像您預期的那樣僅向日期添加工作日（從星期一到星期五）數。
 
 
 <a name="0x10"></a>
-## 0x10 VBA 转换函数一览
+## 0x10 VBA 轉換函數一覽
 
 * [Type conversion functions](type-conversion-functions.md)
 - [10.1 CBool](type-conversion-functions.md#CBool-function-example)
@@ -2054,9 +2054,9 @@ as these are hard to understand. Procedures should fit on one screen -
 ie be 40-50 lines long maximum.- ie be 40-50 lines long maximum.
 3. Always prefix your variables so you can quickly identify their datatype.
 4. Never use the Variant datatype unless absolutely necessary.</br>
-**注**：尽量不要使用`Variant`，要显示的声明具体的数据类型。Variant是VBA中的一种特殊类型，
-所有没有声明的数据类型的变量都默认是Variant型。但Variant型所占的存储空间远大于其他的
-数据类型，所以除非必要，否则应该避免申明变量为Variant型。
+**注**：儘量不要使用`Variant`，要顯示的聲明具體的數據類型。Variant是VBA中的一種特殊類型，
+所有沒有聲明的數據類型的變量都默認是Variant型。但Variant型所佔的存儲空間遠大於其他的
+數據類型，所以除非必要，否則應該避免申明變量爲Variant型。
 5. Always use the keyword "**Call**" to call your procedures.
 6. Always put your arguments in parentheses.
 7. Never use Global variables unless absolutely necessary.
@@ -2076,46 +2076,46 @@ to reduce the amount of scrolling.
 
 
 <a name="91.1"></a>
-### 91.1 调试经验 Excel点击保存时总是弹出隐私信息警告（Privacy Warning:this document contains macros...）的解决方法
+### 91.1 調試經驗 Excel點擊保存時總是彈出隱私信息警告（Privacy Warning:this document contains macros...）的解決方法
 
 警告信息：
 > Privacy Warning:this document contains macros, ActiveX controls, XML expansion pack information or web components. these may include personal information that cannot be removed by the document Inspector.
 
-菜单依次点击：</br>
+菜單依次點擊：</br>
 File → Options → Trust Center → Trust Center Settings → Privacy Options
-取消勾选(Uncheck) "Remove personal information from file properties on save" 选项
+取消勾選(Uncheck) "Remove personal information from file properties on save" 選項
 
 ![Alt text](doc/source/images/trouble_shooting_01.png)
 
 
 <a name="91.2"></a>
-### 91.2 清除Excel数据透视表中过滤器缓存（旧项目）
+### 91.2 清除Excel數據透視表中過濾器緩存（舊項目）
 
-如下图所示，根据数据范围创建数据透视表时，从源范围中删除数据后，即使刷新数据透视表，旧项目仍将存在于数据透视表的下拉菜单中。 如果要从数据透视表的下拉菜单中删除所有旧项目，可参照如下两种方法：
+如下圖所示，根據數據範圍創建數據透視表時，從源範圍中刪除數據後，即使刷新數據透視表，舊項目仍將存在於數據透視表的下拉菜單中。 如果要從數據透視表的下拉菜單中刪除所有舊項目，可參照如下兩種方法：
 
 
-**1. 通过更改选项来清除数据透视表中的过滤器缓存（旧项目）**
+**1. 通過更改選項來清除數據透視表中的過濾器緩存（舊項目）**
 
-Step1: 右键单击数据透视表中的任何单元格，然后单击 数据透视表选项 从上下文菜单。 看截图：   
+Step1: 右鍵單擊數據透視表中的任何單元格，然後單擊 數據透視表選項 從上下文菜單。 看截圖：   
 
 ![Alt text](doc/source/images/doc-clear-filter-cache-1.png)
 
-Step2: 在里面 数据透视表选项 对话框中，单击 **数据** 标签，选择 没有 来自 **每个字段要保留的项目数量** 下拉列表，然后单击 OK 按钮。   
+Step2: 在裏面 數據透視表選項 對話框中，單擊 **數據** 標籤，選擇 沒有 來自 **每個字段要保留的項目數量** 下拉列表，然後單擊 OK 按鈕。   
 
 ![Alt text](doc/source/images/doc-clear-filter-cache-2.png)
 
-Step3: 右键单击“数据透视表”单元格，然后单击 **刷新** 从右键菜单。 看截图：   
+Step3: 右鍵單擊“數據透視表”單元格，然後單擊 **刷新** 從右鍵菜單。 看截圖：   
 
 ![Alt text](doc/source/images/doc-clear-filter-cache-3.png)
 
-然后你可以看到旧的项目从数据透视表的下拉菜单中删除，如下图所示。   
+然後你可以看到舊的項目從數據透視表的下拉菜單中刪除，如下圖所示。   
 
 ![Alt text](doc/source/images/doc-clear-filter-cache-4.png)
 
 
-**2. 使用VBA代码清除所有数据透视表中的过滤器缓存（旧项目）**
+**2. 使用VBA代碼清除所有數據透視表中的過濾器緩存（舊項目）**
 
-在 **项目** 窗格打开 **ThisWorkbook（Code）** 窗口，然后将下面的VBA代码复制并粘贴到窗口中。
+在 **項目** 窗格打開 **ThisWorkbook（Code）** 窗口，然後將下面的VBA代碼複製並粘貼到窗口中。
 ```VBA
 Private Sub Workbook_Open()
     Dim xPt As PivotTable
@@ -2136,96 +2136,96 @@ End Sub
 ```
 ![Alt text](doc/source/images/doc-clear-filter-cache-5.png)
 
-按 F5 键来运行代码，然后从活动工作簿中的所有数据透视表的下拉菜单中立即删除旧项目。
+按 F5 鍵來運行代碼，然後從活動工作簿中的所有數據透視表的下拉菜單中立即刪除舊項目。
 
 
 <a name="8.3"></a>
-### 91.3 解决办法：The macros in this project are disabled.  Please refer to the online help or documentation of the host application to determine how to enable macros.
+### 91.3 解決辦法：The macros in this project are disabled.  Please refer to the online help or documentation of the host application to determine how to enable macros.
 
-错误现象： Excel2016（365）运行macro宏时，弹出标题警告↓   
+錯誤現象： Excel2016（365）運行macro宏時，彈出標題警告↓   
 
 ![Alt text](doc/source/images/trouble_shooting_03_01.png)   
 
-解决办法：   
-step1：先确认Excel的设置是否正确
-依次点击 File >> Options >> Trust Center >> Trust Center Settings >> Macro Settings 按照如下图所示设置：   
+解決辦法：   
+step1：先確認Excel的設置是否正確
+依次點擊 File >> Options >> Trust Center >> Trust Center Settings >> Macro Settings 按照如下圖所示設置：   
 
 ![Alt text](doc/source/images/trouble_shooting_03_02.png)   
 
-step2：确认自己机器的安全级别   
-一般如果按照step1设置后再次运行macro宏依然弹出警告，另一种情况就是你自己的机器（远程PC/Server/VDI等）自身的安全级别过高造成的。   
-打开浏览器依次点击 Tools >> Internet options >> Security >> Customer level...  将安全级别从 **高(High)** 改成 **中(Medium)**。   
+step2：確認自己機器的安全級別   
+一般如果按照step1設置後再次運行macro宏依然彈出警告，另一種情況就是你自己的機器（遠程PC/Server/VDI等）自身的安全級別過高造成的。   
+打開瀏覽器依次點擊 Tools >> Internet options >> Security >> Customer level...  將安全級別從 **高(High)** 改成 **中(Medium)**。   
 
 ![Alt text](doc/source/images/trouble_shooting_03_03.png)   
 
 
 <a name="91.7"></a>
-### 91.7 Excel每次保存时都弹出警告：”此文档中包含宏、Activex控件、XML扩展包信息“（office 2007/2010/365+）
+### 91.7 Excel每次保存時都彈出警告：”此文檔中包含宏、Activex控件、XML擴展包信息“（office 2007/2010/365+）
 
 **1.** office 2003版本：
 
- 依次点击：“工具” → “选项" → "在安全" 选项卡中 **勾选** ”保存时从文件属性中删除个人信息”。
+ 依次點擊：“工具” → “選項" → "在安全" 選項卡中 **勾選** ”保存時從文件屬性中刪除個人信息”。
 
 ![Alt text](doc/source/images/trouble-shootings/remove_activeX_warning_1.png)
 
 
 **2.** office 2007/2010/365+版本：
 
-单击“Office按钮（或文件菜单） → Excel选项（或选项） → 信任中心”，单击“信任中心设置”按钮，选择“个人信息选项”（隐私选项Privacy Options），在“文档特定设置”下 **取消** 勾选 “保存时从文件属性中删除个人信息” 后确定。
+單擊“Office按鈕（或文件菜單） → Excel選項（或選項） → 信任中心”，單擊“信任中心設置”按鈕，選擇“個人信息選項”（隱私選項Privacy Options），在“文檔特定設置”下 **取消** 勾選 “保存時從文件屬性中刪除個人信息” 後確定。
 
-**注意：** 该选项仅对当前工作簿有效。另外，新建工作簿时该选项为灰色不可用，只有用“文档检查器”检查了文档并删除了个人信息后该选项才可用。
+**注意：** 該選項僅對當前工作簿有效。另外，新建工作簿時該選項爲灰色不可用，只有用“文檔檢查器”檢查了文檔並刪除了個人信息後該選項纔可用。
 
 ![Alt text](doc/source/images/trouble-shootings/remove_activeX_warning_2.png)
 
 
 <a name="91.8"></a>
-### 91.8 解决办法：使用.xlam宏文件执行VBA程序时，操作excel无任何反应
+### 91.8 解決辦法：使用.xlam宏文件執行VBA程序時，操作excel無任何反應
 
-今天小伙伴遇到一个问题，自己做了一个xlam的工具，实现更改当前excel的所有sheet名称，但是当点击工具button的时候程序无反应。   
-代码如下：
+今天小夥伴遇到一個問題，自己做了一個xlam的工具，實現更改當前excel的所有sheet名稱，但是當點擊工具button的時候程序無反應。   
+代碼如下：
 
 ```
 Sub demo45()
-    Dim ws As Worksheet          ' 把ws 定义为一个工作表对象
-    For Each ws In Worksheets    ' 用for each 遍历对象集合
+    Dim ws As Worksheet          ' 把ws 定義爲一個工作表對象
+    For Each ws In Worksheets    ' 用for each 遍歷對象集合
     ws.Name = "Test_" & ws.Name  ' 改名
     Next
 End Sub
 ```
 
-原因及解决办法：   
-首先看代码并没有什么问题，调查的时候在循环语句中添加了ThisWorkbook指定，
-但执行macro的时候发现sheet名字依然没有改变。在无意间看 工程资源管理器（Project Explore）
-的时候，发现VBAProject(XXX.xlam)中的默认Sheet1的名字被改变，这也就说明了，不是VBA程序
-没有起作用，而是程序在执行的时候默认操作了xlam工作簿。后修改程序中的默认制定工作簿语句
-为：`ActiveWorkbook` marco可以正常执行操作，问题得以解决。
+原因及解決辦法：   
+首先看代碼並沒有什麼問題，調查的時候在循環語句中添加了ThisWorkbook指定，
+但執行macro的時候發現sheet名字依然沒有改變。在無意間看 工程資源管理器（Project Explore）
+的時候，發現VBAProject(XXX.xlam)中的默認Sheet1的名字被改變，這也就說明了，不是VBA程序
+沒有起作用，而是程序在執行的時候默認操作了xlam工作簿。後修改程序中的默認制定工作簿語句
+爲：`ActiveWorkbook` marco可以正常執行操作，問題得以解決。
 
 
 <a name="0x92"></a>
-## 0x92 VBA示例代码
-VBA示例代码查看：[点击这里](SampleCode.bas)。
+## 0x92 VBA示例代碼
+VBA示例代碼查看：[點擊這裏](SampleCode.bas)。
 
 
 <a name="docslist"></a>
-## 0xFF VBA学习资源列表
-- [MSDN 函数 (Visual Basic for Applications)](https://docs.microsoft.com/zh-cn/office/vba/language/reference/functions-visual-basic-for-applications)
-- [Excel-vba coding规约/开发规范](https://github.com/Youchien/development-specification/blob/master/doc/source/Excel-vba%20Language%20Specification.md)
-- [Excel VBA 参考,官方文档,适用2013及以上](https://msdn.microsoft.com/zh-cn/library/ee861528.aspx)
-- [Excel宏教程 (宏的介绍与基本使用)](http://blog.csdn.net/lyhdream/article/details/9060801)
-- [Excel2010中的VBA入门,官方文档](https://docs.microsoft.com/zh-cn/previous-versions/office/ee814737(v=office.14))
-- [Excel VBA的一些书籍资源,百度网盘](https://pan.baidu.com/s/1ktVmW63s8utBpAdcGnJfJA)  （提取码: `j92n`）
-- [Excel 函数速查手册](https://support.office.com/zh-cn/article/Excel-%E5%87%BD%E6%95%B0%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA%EF%BC%89-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?ui=zh-CN&rs=zh-CN&ad=CN)
+## 0xFF VBA學習資源列表
+- [MSDN 函數 (Visual Basic for Applications)](https://docs.microsoft.com/zh-cn/office/vba/language/reference/functions-visual-basic-for-applications)
+- [Excel-vba coding規約/開發規範](https://github.com/Youchien/development-specification/blob/master/doc/source/Excel-vba%20Language%20Specification.md)
+- [Excel VBA 參考,官方文檔,適用2013及以上](https://msdn.microsoft.com/zh-cn/library/ee861528.aspx)
+- [Excel宏教程 (宏的介紹與基本使用)](http://blog.csdn.net/lyhdream/article/details/9060801)
+- [Excel2010中的VBA入門,官方文檔](https://docs.microsoft.com/zh-cn/previous-versions/office/ee814737(v=office.14))
+- [Excel VBA的一些書籍資源,百度網盤](https://pan.baidu.com/s/1ktVmW63s8utBpAdcGnJfJA)  （提取碼: `j92n`）
+- [Excel 函數速查手冊](https://support.office.com/zh-cn/article/Excel-%E5%87%BD%E6%95%B0%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%97%E5%87%BA%EF%BC%89-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?ui=zh-CN&rs=zh-CN&ad=CN)
 - [VBA的一些使用心得](http://www.cnblogs.com/techyc/p/3355054.html)
-- [VBA函数参考](https://msdn.microsoft.com/zh-cn/library/office/jj692811.aspx)
-- [VBA入门参考，英文](http://analystcave.com/vba-cheat-sheet/)
+- [VBA函數參考](https://msdn.microsoft.com/zh-cn/library/office/jj692811.aspx)
+- [VBA入門參考，英文](http://analystcave.com/vba-cheat-sheet/)
 
 
 <a name="license"></a>
-## 开源许可
-本Repository除特殊注明外，均采用 Creative Commons [BY-NC-ND 4.0](LICENSE)（自由转载-保持署名-非商用-禁止演绎）协议发布。
+## 開源許可
+本Repository除特殊註明外，均採用 Creative Commons [BY-NC-ND 4.0](LICENSE)（自由轉載-保持署名-非商用-禁止演繹）協議發佈。
 
 
-## 鸣谢列表
+## 鳴謝列表
 ### Code Contributors
 | <img src="https://avatars0.githubusercontent.com/u/25427352" alt="bluetata" width="100px" height="100px"/> |<img src="https://avatars2.githubusercontent.com/u/46813661" alt="chromeheart" width="100px" height="100px"/> |<img src="https://avatars3.githubusercontent.com/u/3829140" alt="BobBJSun" width="100px" height="100px"/> | | | | |
 | :----: |:----: |:----: |:----: |:----: |:----: |:----: |
